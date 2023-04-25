@@ -1,0 +1,318 @@
+<% layout('layouts/boilerplate')%>
+
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/"><i class="bi bi-house-door-fill"></i></a></li>
+    <li class="breadcrumb-item active" aria-current="page">Recipes</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <% if (recipes.length > 0) {%>
+  <div class="col-md-9">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">  
+      <% for (let recipe of recipes) { %>
+      <div class="col">
+        <a href="/api/recipes/<%=recipe._id%>" style="text-decoration: none; color: #d4d4d4;">
+          <div class="card shadow-sm">
+            <img src="<%=recipe.image.url%>" alt="<%=recipe.title%>"/>
+            <div class="card-body">
+              <p class="card-title" style="text-transform: capitalize"><b><%=recipe.title%></b></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-body-secondary"><i class="bi bi-alarm"></i> <%=recipe.totalTime%> mins</small>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <% } %>
+    </div>
+  </div>
+  <% } else { %>
+  <div class="col-md-9">
+    <p class="text-center">We apologize, but there are currently no cooking recipes available. Please check back later! Thank you for your understanding!</p>
+  </div>
+  <% } %>
+
+  <div class="col-md-3">
+    <div class="card mb-3 pb-3" style="height: fit-content; background-color: #333333">
+
+      <form action="/api/recipes" method="GET" class="row mx-auto" role="search" id="filterForm">
+        <h5 class="text-white text-center mt-2">Filter Recipes</h5>
+
+        <div class="col-md-12">
+          <label class="form-label" for="searchTitle">Recipe Title:</label>
+          <input type="text" class="form-control search-title" id="searchTitle" name="search" value="<%= searchValue || '' %>" />
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label">Meal Type:</label>
+          <select class="form-control" id="mealType" name="mealTypes">
+            <% mealTypesOptions.forEach(option => { %>
+              <option value="<%= option %>" <%= mealTypeValue === option ? 'selected' : '' %>>
+                <%= option %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label">Dish Type:</label>
+          <select class="form-control" id="dishType" name="dishTypes">
+            <% dishTypesOptions.forEach(option => { %>
+              <option value="<%= option %>" <%= dishTypeValue === option ? 'selected' : '' %>>
+                <%= option %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label">Cuisine:</label>
+          <select class="form-control" id="cuisines" name="cuisines">
+            <% cuisinesOptions.forEach(option => { %>
+              <option value="<%= option %>" <%= cuisinesValue === option ? 'selected' : '' %>>
+                <%= option %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label" for="totalTime">Total Cooking Time:</label>
+          <input type="number" class="form-control total-time" id="totalTime" min="0" name="totalTime" value="<%= totalTimeValue || '' %>" />
+        </div>
+
+        <div class="col-md-12 mt-3 d-flex justify-content-around">
+          <button class="btn btn-warning search-form-btn" type="submit"><i class="bi bi-search"></i> Search</button>
+          <button class="btn btn-secondary reset-form-btn" onclick="removeFiltersFromLocaleStorage()"><i class="bi bi-eraser-fill"></i> Clear</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-md-12 mx-auto">
+      <button class="btn btn-secondary col-12"  onclick="location.href='/api/recipes/new'" style="background-color:  #57bb71;"><i class="bi bi-plus-circle"></i> New Recipe</button>
+    </div>
+  </div>
+  <div class="col-md-9">
+        <!-- PAGINATION -->
+    <nav class="mt-5" aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item me-5 custom-page-link prev">
+          <a style="border: none" class="page-link custom-page-link <%= currentPage <= 1 ? 'disabled' : '' %>" href="/api/recipes?page=<%= currentPage - 1  %>&limit=<%= limitPerPage %>" aria-label="Previous">
+            <span aria-hidden="true"><i class="bi bi-caret-left-fill"></i>Prev</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <p class="page-link custom-pagination disabled">Page</p>
+        </li>
+        <li class="page-item">
+          <input class="page-link custom-pagination-value" type="number" min="1" max="<%=totalPages%>" style="width: 4rem" value="<%=currentPage %>"/>
+        </li>
+        <li class="page-item">
+          <p class="page-link custom-pagination disabled" >of <span class="total-pages"><%=totalPages%></span></p>
+        </li>
+        <li class="page-item me-5">
+          <button class="btn btn-warning pagination-btn">Go</button>
+        </li>
+        <li class="page-item custom-page-link next">
+          <a style="border: none"  class="page-link custom-page-link <%= currentPage >=  totalPages  ? 'disabled' : '' %>" href="/api/recipes?page=<%= currentPage < totalPages ? currentPage + 1 : currentPage  %>&limit=<%= limitPerPage %>" aria-label="Next">
+            <span aria-hidden="true">Next<i class="bi bi-caret-right-fill"></i></span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+
+<script>
+  let searchFormBtn = document.querySelector(".search-form-btn");
+  let resetFormBtn = document.querySelector(".reset-form-btn")
+  let paginationBtn = document.querySelector(".pagination-btn");
+
+  let filterRecipeTitle = document.querySelector("#searchTitle");
+  let filterMealType = document.querySelector("#mealType");
+  let filterDishType = document.querySelector("#dishType");
+  let filterCuisine = document.querySelector("#cuisines");
+  let filterTotalCookingTime = document.querySelector("#totalTime");
+
+  let prev = document.querySelector(".prev");
+  let next = document.querySelector(".next");
+
+  function saveFiltersToLocaleStorage() {
+    filterRecipeTitle = document.querySelector("#searchTitle").value;
+    filterMealType = document.querySelector("#mealType").value;
+    filterDishType = document.querySelector("#dishType").value;
+    filterCuisine = document.querySelector("#cuisines").value;
+    filterTotalCookingTime = document.querySelector("#totalTime").value;
+
+    // Store filter options
+    const filterOptionsState = { filterRecipeTitle, filterMealType, filterDishType, filterCuisine, filterTotalCookingTime};
+    localStorage.setItem('filterOptionsState', JSON.stringify(filterOptionsState));
+  }
+  //jasalabo
+  //saveFiltersToLocaleStorage()
+
+  function removeFiltersFromLocaleStorage() {
+    // Check if the item exists in the local storage
+    if (localStorage.getItem("filterOptionsState")) {
+      // Remove the item from the local storage
+      localStorage.removeItem("filterOptionsState");
+      console.log("Filters removed from the local storage.");
+    } 
+  }
+
+  function clearFormFilterValues() {
+    filterRecipeTitle.value = "";
+    filterMealType.selectedIndex = -1;
+    filterDishType.selectedIndex = -1;
+    filterCuisine.selectedIndex = -1;
+    filterTotalCookingTime.value = "";
+  }
+
+  searchFormBtn.addEventListener("click", () => {
+    saveFiltersToLocaleStorage()
+  })
+  
+  resetFormBtn.addEventListener("click", () => {
+    removeFiltersFromLocaleStorage()
+    clearFormFilterValues()
+  })
+
+    // Store pagination state
+    let currentPage = 1;
+    const pageSize = 9;
+    const paginationState = { currentPage, pageSize };
+    //localStorage.setItem('paginationState', JSON.stringify(paginationState));
+
+
+    next.addEventListener('click', (e) => {
+      e.preventDefault()
+      
+      let customPaginationValue = document.querySelector(".custom-pagination-value").value
+      customPaginationValue ++
+      // Retrieve filter options
+      let filterOptions = JSON.parse(localStorage.getItem('filterOptionsState'));
+      let currentUrl = window.location.href;
+      let startURL = currentUrl.split('?')[0];
+      let urltogo = startURL + `?page=${encodeURI(customPaginationValue)}&limit=${encodeURI(pageSize)}&search=${encodeURI(filterOptions.filterRecipeTitle)}&mealTypes=${encodeURI(filterOptions.filterMealType)}&dishTypes=${encodeURI(filterOptions.filterDishType)}&cuisines=${encodeURI(filterOptions.filterCuisine)}&totalTime=${encodeURI(filterOptions.filterTotalCookingTime)}`
+      window.location.href = urltogo
+    })
+
+    prev.addEventListener('click', (e) => {
+      e.preventDefault()
+      //currentPage -= 1
+
+      let customPaginationValue = document.querySelector(".custom-pagination-value").value
+      customPaginationValue --
+     // Retrieve filter options
+     let filterOptions = JSON.parse(localStorage.getItem('filterOptionsState'));
+     let currentUrl = window.location.href;
+     let startURL = currentUrl.split('?')[0];
+     let urltogo = startURL + `?page=${encodeURI(customPaginationValue)}&limit=${encodeURI(pageSize)}&search=${encodeURI(filterOptions.filterRecipeTitle)}&mealTypes=${encodeURI(filterOptions.filterMealType)}&dishTypes=${encodeURI(filterOptions.filterDishType)}&cuisines=${encodeURI(filterOptions.filterCuisine)}&totalTime=${encodeURI(filterOptions.filterTotalCookingTime)}`
+     window.location.href = urltogo
+    })
+
+    paginationBtn.addEventListener("click", () => {
+
+      let customPaginationValue = document.querySelector(".custom-pagination-value").value
+      // Retrieve filter options
+      let filterOptions = JSON.parse(localStorage.getItem('filterOptionsState'));
+
+      let currentUrl = window.location.href;
+      let startURL = currentUrl.split('?')[0];
+      console.log("startURL", startURL)
+      console.log(thefilters)
+
+
+      let urltogo = startURL + `?page=${encodeURI(customPaginationValue)}&limit=${encodeURI(pageSize)}&search=${encodeURI(filterOptions.filterRecipeTitle)}&mealTypes=${encodeURI(filterOptions.filterMealType)}&dishTypes=${encodeURI(filterOptions.filterDishType)}&cuisines=${encodeURI(filterOptions.filterCuisine)}&totalTime=${encodeURI(filterOptions.filterTotalCookingTime)}`
+      window.location.href = urltogo
+      
+      // Remove query parameters from the URL
+      //let cleanUrl = currentUrl.split('?')[1];
+
+      
+      // http://localhost:3000/api/recipes?search=sweet&mealTypes=Brunch&dishTypes=Side+Dish&cuisines=Asian+cuisine&totalTime=90
+      //let cleanUrl2 = currentUrl.split('?')[1];
+      //let cleanUrl1 = currentUrl.split('?')[0];
+      //console.log('1', cleanUrl1)
+      //1 http://localhost:3000/api/recipes
+      
+      //console.log('2', cleanUrl2)
+      //2 search=sweet&mealTypes=Brunch&dishTypes=Side+Dish&cuisines=Asian+cuisine&totalTime=90
+      
+
+      //let newUrl = `?recipes&page=${encodeURI(customPagination)}&limit=${encodeURI(pageSize)}&search=${encodeURI(filterOptions.filterRecipeTitle)}&mealTypes=${encodeURI(filterOptions.filterMealType)}&dishTypes=${encodeURI(filterOptions.filterDishType)}&cuisines=${encodeURI(filterOptions.filterCuisine)}&totalTime=${encodeURI(filterOptions.filterTotalCookingTime)}`
+
+      // Redirect to the clean URL
+      //window.location.href = newUrl;
+
+    })
+
+
+
+
+ 
+</script>
+
+
+
+<style>
+  .custom-pagination {
+    border: none;
+    background-color: inherit !important;
+  }
+ 
+  /* Chrome, Safari, Edge, Opera */
+  .custom-pagination-value::-webkit-outer-spin-button,
+  .custom-pagination-value::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  .custom-pagination-value[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+</style>
+
+<style>
+  .custom-page-link.disabled {
+    border: none;
+    background-color: initial;
+    outline: none;
+  }
+
+.custom-page-link:hover,
+.custom-page-link:active,
+.custom-page-link:focus {
+  border: none;
+  background-color: initial;
+  outline: none;
+}
+
+.custom-page-link:hover,
+.custom-page-link:active,
+.custom-page-link:focus {
+  border: none;
+  background-color: initial;
+  outline: none;
+}
+
+ /* Chrome, Safari, Edge, Opera */
+ .total-time::-webkit-outer-spin-button,
+ .total-time::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+ }
+ /* Firefox */
+ .total-time[type="number"] {
+   -moz-appearance: textfield;
+ }
+
+
+</style>
+

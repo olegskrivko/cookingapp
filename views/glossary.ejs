@@ -1,0 +1,26 @@
+<% layout('layouts/boilerplate')%>
+<div class="row">
+  <% for (let letter of alphabet) { %>
+  <div class="col-lg-4 mb-4">
+    <div style="position: relative; width: 140px; height: 140px">
+      <span style="text-transform: capitalize">
+        <svg viewBox="0 0 140 140">
+          <circle cx="70" cy="70" r="70" fill="var(--bs-secondary-color)" />
+          <text
+            x="50%"
+            y="50%"
+            text-anchor="middle"
+            dominant-baseline="middle"
+            font-size="64"
+            fill="white"
+            font-family="sans-serif"
+            font-weight="bold"
+          >
+            <%=letter%>
+          </text>
+        </svg></span
+      >
+    </div>
+  </div>
+  <% } %>
+</div>

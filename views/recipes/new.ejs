@@ -1,0 +1,641 @@
+<% layout('layouts/boilerplate')%>
+
+<form
+  id="recipe-form"
+  class="row g-3"
+  action="/api/recipes"
+  method="POST"
+  novalidate
+  enctype="multipart/form-data"
+>
+  <!-- Done -->
+  <div class="col-md-6 mb-3">
+    <label for="inputTitle" class="form-label">Title</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-fonts"></i>
+      </span>
+      <input
+        name="title"
+        type="text"
+        class="form-control"
+        id="inputTitle"
+        maxlength="60"
+        aria-label="Recipe Title up to 60 characters"
+        required
+        autocomplete="off"
+        aria-required="true"
+        autocapitalize="words"
+        autofocus
+      />
+    </div>
+    <small class="form-text text-muted">Maximum length 60 characters.</small>
+  </div>
+  <!-- Done -->
+  <div class="col-md-3 mb-3">
+    <label for="inputDifficulty" class="form-label">Difficulty</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-bar-chart-fill"></i>
+      </span>
+      <select
+        name="difficulty"
+        id="inputDifficulty"
+        class="form-select"
+        required
+        aria-required="true"
+        aria-label="Select Difficulty"
+      >
+        <% difficultyOptions.forEach(option => { %>
+        <option value="<%= option %>"><%= option %></option>
+        <% }) %>
+      </select>
+    </div>
+    <small class="form-text text-muted">Please provide recipe difficulty level.</small>
+  </div>
+
+  <!-- Done -->
+  <div class="col-md-3 mb-3">
+    <label for="inputServings" class="form-label">Servings</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-people-fill"></i>
+      </span>
+      <input
+        id="inputServings"
+        type="number"
+        class="form-control"
+        name="servings"
+        min="1"
+        max="16"
+        required
+        aria-required="true"
+      />
+    </div>
+    <small class="form-text text-muted">Maximum of 16 servings allowed.</small>
+  </div>
+
+  <!-- Done -->
+  <div class="col-md-12 mb-3">
+    <label for="textareaDescription" class="form-label">Description</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-body-text"></i></span>
+      <textarea
+        class="form-control"
+        id="textareaDescription"
+        style="resize: none"
+        name="description"
+        maxlength="500"
+        autocomplete="off"
+        rows="4"
+        required
+        aria-required="true"
+        autocapitalize="sentences"
+      ></textarea>
+    </div>
+    <small class="form-text text-muted">Maximum length 500 characters.</small>
+  </div>
+
+  <!-- Done -->
+  <div class="col-md-3 mb-3">
+    <label for="inputDishTypes" class="form-label">Dish Type:</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-cup-hot-fill"></i></span>
+      <select
+        id="inputDishTypes"
+        class="form-select"
+        name="dishTypes"
+        multiple
+        size="4"
+        required
+        aria-required="true"
+        aria-label="Select Dish Types"
+      >
+        <% dishTypesOptions.forEach(option => { %>
+        <option value="<%= option %>"><%= option %></option>
+        <% }) %>
+      </select>
+    </div>
+    <small class="form-text text-muted"
+      >Use <kbd>ctrl</kbd> key to select up to 3 dish types.</small
+    >
+  </div>
+
+  <!-- Done -->
+  <div class="col-md-3 mb-3">
+    <label for="inputMealTypes" class="form-label">Meal Type:</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-cup-hot-fill"></i>
+      </span>
+      <select
+        name="mealTypes"
+        id="inputMealTypes"
+        class="form-select"
+        multiple
+        size="4"
+        required
+        aria-required="true"
+        aria-label="Select Meal Types"
+      >
+        <% mealTypesOptions.forEach(option => { %>
+        <option value="<%= option %>"><%= option %></option>
+        <% }) %>
+      </select>
+    </div>
+    <small class="form-text text-muted"
+      >Use <kbd>ctrl</kbd> key to select up to 3 meal types.</small
+    >
+  </div>
+
+  <!-- Done -->
+  <div class="col-md-3 mb-3">
+    <label for="inputCuisine" class="form-label">Cuisine</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-globe-americas"></i></span>
+      <select
+        id="inputCuisine"
+        class="form-select"
+        name="cuisines"
+        multiple
+        required
+        size="4"
+        aria-required="true"
+        aria-label="Select Cuisines"
+      >
+        <% cuisinesOptions.forEach(option => { %>
+        <option value="<%= option %>"><%= option %></option>
+        <% }) %>
+      </select>
+    </div>
+    <small class="form-text text-muted">Use <kbd>ctrl</kbd> key to select up to 3 cuisines.</small>
+  </div>
+
+  <!-- Done -->
+  <div class="col-md-3 mb-3">
+    <label for="inputAllergens" class="form-label">Contains Allergens</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-exclamation-triangle-fill"></i></span>
+      <select id="inputAllergens" class="form-select" name="allergens" multiple>
+        <% allergensOptions.forEach(option => { %>
+        <option value="<%= option %>"><%= option %></option>
+        <% }) %>
+      </select>
+    </div>
+    <small class="form-text text-muted"
+      >To select multiple allergens, use the <kbd>ctrl</kbd> key</small
+    >
+  </div>
+
+  <!-- Done -->
+  <div class="col-md-3 mb-3">
+    <label for="inputPreparationTime" class="form-label">Preparation time</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-alarm"></i></span>
+      <input
+        id="inputPreparationTime"
+        type="number"
+        class="form-control"
+        name="prepTime"
+        min="0"
+        max="1440"
+        value="0"
+        required
+        aria-required="true"
+      />
+      <span class="input-group-text">min</span>
+    </div>
+    <small class="form-text text-muted">Preparation time cannot exceed 1440 min | 24h</small>
+  </div>
+
+  <!-- Done -->
+  <div class="col-md-3 mb-3">
+    <label for="inputCookingTime" class="form-label">Cooking time</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-alarm"></i></span>
+      <input
+        id="inputCookingTime"
+        type="number"
+        class="form-control"
+        name="cookTime"
+        min="0"
+        max="1440"
+        value="0"
+        required
+        aria-required="true"
+      />
+      <span class="input-group-text">min</span>
+    </div>
+    <small class="form-text text-muted">Cooking time cannot exceed 1440 min | 24h</small>
+  </div>
+
+  <!-- Done -->
+  <div class="col-md-6 mb-3">
+    <label for="inputImage" class="form-label">Add image</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-image"></i></span>
+      <input
+        type="file"
+        class="form-control"
+        id="inputImage"
+        name="image"
+        required
+        aria-required="true"
+        accept="image/png, image/jpeg, image/jpg"
+      />
+    </div>
+    <small class="form-text text-muted"
+      >Please upload a high-quality image in one of the following formats: JPG, PNG, or JPEG.</small
+    >
+  </div>
+
+  <!-- Done -->
+  <div class="col-md-12 ingredient-box" id="ingredientContainerLabel">
+    <label for="ingredient-container" class="form-label small text-muted"
+      >Please enter a list of all ingredients required for this recipe, along with their respective
+      quantities. If there are any optional ingredients, please indicate this by unchecking the
+      corresponding checkbox.</label
+    >
+    <div class="ingredient-container"></div>
+    <div class="d-grid gap-2 col-md-6 mx-auto">
+      <button id="add-ingredient-btn" class="btn btn-warning col-md-6 mx-auto" type="button">
+        <i class="bi bi-handbag"></i> Add Ingredient
+      </button>
+    </div>
+  </div>
+
+  <!-- Done -->
+  <div class="col-md-12 instruction-box" id="instructionContainerLabel">
+    <label for="instruction-container" class="form-label small text-muted"
+      >Please provide a detailed list of instructions for preparing this recipe. If necessary, you
+      may include additional notes or tips to help ensure success.</label
+    >
+    <div class="instruction-container"></div>
+    <div class="d-grid gap-2 col-md-6 mx-auto">
+      <button id="add-instruction-btn" class="btn btn-warning col-md-6 mx-auto" type="button">
+        <i class="bi bi-list"></i> Add Instruction
+      </button>
+    </div>
+  </div>
+</form>
+
+<div class="col-md-12 mt-5">
+  <button type="submit" form="recipe-form" class="btn btn-primary col-2 float-end">Save</button>
+</div>
+
+<!-- HTML code for the template -->
+<template id="ingredient-template">
+  <div class="input-group mb-3">
+    <!-- ingredient checkbox -->
+    <div class="input-group-text">
+      <span><label class="ingredient-checkbox-label">Required</label>&nbsp;</span>
+      <input
+        class="form-check-input ingredient-checkbox"
+        name="ingredients[required]"
+        type="checkbox"
+        checked
+        value="true"
+      />
+    </div>
+    <!-- ingredient input field -->
+    <input
+      list="suggestion-list"
+      type="text"
+      oninput="automcomplete(this)"
+      class="form-control ingredient-input"
+      name="ingredients[name][]"
+      placeholder="Search ingredient (up to 50 characters)"
+      autocomplete="off"
+      required
+      maxlength="50"
+      aria-required="true"
+      aria-label="Ingredient"
+      style="max-width: 60%"
+    />
+    <datalist class="suggestion-list" id="suggestion-list"></datalist>
+    <!-- ingredient quantity field -->
+    <input
+      id="inputQuantity"
+      type="number"
+      class="form-control"
+      name="ingredients[quantity][]"
+      min="0"
+      max="1000"
+      autocomplete="off"
+      placeholder="Quantity"
+      required
+      aria-required="true"
+      aria-label="Quantity"
+      style="max-width: 20%"
+    />
+    <!-- ingredient units field -->
+    <select
+      class="form-select"
+      aria-label="Select unit"
+      required
+      aria-required="true"
+      name="ingredients[unit][]"
+      style="max-width: 20%"
+    >
+      <% unitOptions.forEach(option => { %>
+      <option value="<%= option %>"><%= option %></option>
+      <% }) %>
+    </select>
+    <!-- ingredient delete btn -->
+    <button data-action="delete" class="btn btn-danger delete-ingredient-btn" type="button">
+      <i class="bi bi-trash3" style="pointer-events: none"></i>
+    </button>
+  </div>
+</template>
+
+<!-- HTML code for the template -->
+<template id="instruction-template">
+  <div class="input-group mb-3">
+    <span class="input-group-text instruction-nbr">Step 1</span>
+    <input
+      type="text"
+      class="form-control instruction-input"
+      autocomplete="off"
+      name="instructions[step][]"
+      placeholder="Instruction"
+      aria-label="Instruction"
+    />
+    <!-- additional field with note or tip can be added later-->
+    <button data-action="delete" class="btn btn-danger delete-instruction-btn" type="button">
+      <i class="bi bi-trash3" style="pointer-events: none"></i>
+    </button>
+  </div>
+</template>
+
+<!-- JavaScript code to handle adding fields -->
+<!-- MOVE IT TO EXTERNAL FILE LATER -->
+<script>
+  const recipeForm = document.querySelector("#recipe-form");
+  const ingredientContainer = document.querySelector(".ingredient-container");
+  const instructionContainer = document.querySelector(".instruction-container");
+
+  const addIngredientBtn = document.querySelector("#add-ingredient-btn");
+  const addInstructionBtn = document.querySelector("#add-instruction-btn");
+
+  const deleteIngredientBtn = document.querySelector(".delete-ingredient-btn");
+  const deleteInstructionBtn = document.querySelector(".delete-instruction-btn");
+
+  const ingredientTemplate = document.querySelector("#ingredient-template");
+  const instructionTemplate = document.querySelector("#instruction-template");
+
+  let ingredientCount = 1;
+  let instructionCount = 1;
+
+  // function to add new ingredient
+  function addIngredientElement() {
+    let ingredient = ingredientTemplate.content.cloneNode(true);
+    ingredient
+      .querySelector(".ingredient-checkbox")
+      .setAttribute("id", `ingredientCheckbox${ingredientCount}`);
+    ingredient
+      .querySelector(".ingredient-checkbox-label")
+      .setAttribute("for", `ingredientCheckbox${ingredientCount}`);
+    ingredient
+      .querySelector(".ingredient-checkbox")
+      .setAttribute("name", `ingredients[required][item${ingredientCount}]`);
+    ingredient
+      .querySelector(".ingredient-input")
+      .setAttribute("id", `ingredient${ingredientCount}`);
+    ingredient
+      .querySelector(".ingredient-input")
+      .setAttribute("list", `suggestion-list${ingredientCount}`);
+    // fix data list
+    ingredient
+      .querySelector(".suggestion-list")
+      .setAttribute("id", `suggestion-list${ingredientCount}`);
+
+    ingredientContainer.appendChild(ingredient);
+  }
+
+  function addInstructionElement() {
+    let instruction = instructionTemplate.content.cloneNode(true);
+
+    instruction
+      .querySelector(".instruction-input")
+      .setAttribute("id", `instruction${instructionCount}`);
+    instruction.querySelector(".instruction-nbr").innerText = `Step ${instructionCount}`;
+    instructionContainer.appendChild(instruction);
+  }
+
+  // Add 1 ingredient input element on page load
+  (function () {
+    addIngredientElement();
+  })();
+
+  // Add 1 instruction element on page load
+  (function () {
+    addInstructionElement();
+  })();
+
+  function fixIngredientAttributes() {
+    // fix remaining ingredient attributes: name, id, and label after user deletes some random ingredient
+    let allCheckboxes = document.querySelectorAll(".ingredient-checkbox");
+    let allIngredientInputs = document.querySelectorAll(".ingredient-input");
+    let allIngredientLabels = document.querySelectorAll(".ingredient-checkbox-label");
+    let allIngredientsDatalists = document.querySelectorAll(".suggestion-list");
+
+    let indexLabels = 1;
+    let indexCheckbox = 1;
+    let indexIngredient = 1;
+    let indexDatalist = 1;
+
+    allCheckboxes.forEach((item) => {
+      item.setAttribute("name", `ingredients[required][item${indexCheckbox}]`);
+      item.setAttribute("id", `ingredientCheckbox${indexCheckbox}`);
+      indexCheckbox++;
+    });
+
+    allIngredientLabels.forEach((item) => {
+      item.setAttribute("for", `ingredientCheckbox${indexLabels}`);
+      indexLabels++;
+    });
+
+    allIngredientInputs.forEach((item) => {
+      item.setAttribute("id", `ingredient${indexIngredient}`);
+      item.setAttribute("list", `suggestion-list${indexIngredient}`);
+      indexIngredient++;
+    });
+
+    allIngredientsDatalists.forEach((item) => {
+      item.setAttribute("id", `suggestion-list${indexDatalist}`);
+      indexDatalist++;
+    });
+  }
+
+  function fixInstructionAttributes() {
+    let allInstructionInputs = document.querySelectorAll(".instruction-input");
+    let instructionNbrs = document.querySelectorAll(".instruction-nbr");
+    let indexInstruction = 1;
+    let indexStepNbr = 1;
+
+    allInstructionInputs.forEach((item) => {
+      item.setAttribute("id", `instruction${indexInstruction}`);
+      indexInstruction++;
+    });
+
+    instructionNbrs.forEach((item) => {
+      item.innerText = `Step ${indexStepNbr}`;
+      indexStepNbr++;
+    });
+  }
+
+  // Add new ingredient element
+  addIngredientBtn.addEventListener("click", () => {
+    addIngredientElement();
+    fixIngredientAttributes();
+  });
+
+  // Add new instruction element
+  addInstructionBtn.addEventListener("click", () => {
+    addInstructionElement();
+    fixInstructionAttributes();
+  });
+
+  // Bind the event to the parent element
+  recipeForm.addEventListener("click", function (event) {
+    // check the delete button was clicked
+    if (event.target.dataset.action === "delete") {
+      // remove parent element (remove input field)
+      const delBtnParent = event.target.parentElement;
+      delBtnParent.remove();
+      // fix attributes after deleting
+      fixIngredientAttributes();
+      fixInstructionAttributes();
+    }
+  });
+
+  // add this logic to backend instead of frontend to hide api
+  function automcomplete(inputElement) {
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const apiKey = "dfc2a66c93a14b528b3ccceadd16042d";
+    inputElement.addEventListener("input", async (event) => {
+      let input = event.target;
+      let inputValue = input.value;
+      let suggestionList = input.nextElementSibling;
+      let suggestionNumber = 10;
+
+      if (inputValue.length >= 2) {
+        let response = await fetch(
+          `https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${apiKey}&query=${inputValue}&number=${suggestionNumber}`,
+          options
+        );
+        let data = await response.json();
+        suggestionList.innerHTML = "";
+
+        data.forEach((suggestion) => {
+          let suggestionOption = document.createElement("option");
+          suggestionOption.value = suggestion.name;
+          suggestionList.appendChild(suggestionOption);
+        });
+      } else {
+        suggestionList.innerHTML = "";
+      }
+    });
+  }
+</script>
+
+<script>
+  // prevent selecting more then 3 options
+  const selectCuisine = document.getElementById("inputCuisine");
+
+  // Add event listener for 'change' event on the select element
+  selectCuisine.addEventListener("change", (event) => {
+    const selectedOptions = event.target.selectedOptions;
+    const maxLimit = 3; // Maximum number of allowed selections
+    // If number of selected options exceeds the maximum limit, unselect the last selected option
+    if (selectedOptions.length > maxLimit) {
+      selectedOptions[selectedOptions.length - 1].selected = false;
+    }
+  });
+
+  // prevent selecting more then 3 options
+  const selectInputMealTypes = document.getElementById("inputMealTypes");
+
+  // Add event listener for 'change' event on the select element
+  selectInputMealTypes.addEventListener("change", (event) => {
+    const selectedOptions = event.target.selectedOptions;
+    const maxLimit = 3; // Maximum number of allowed selections
+    // If number of selected options exceeds the maximum limit, unselect the last selected option
+    if (selectedOptions.length > maxLimit) {
+      selectedOptions[selectedOptions.length - 1].selected = false;
+    }
+  });
+
+  // prevent selecting more then 3 options
+  const selectInputDishTypes = document.getElementById("inputDishTypes");
+
+  // Add event listener for 'change' event on the select element
+  selectInputDishTypes.addEventListener("change", (event) => {
+    const selectedOptions = event.target.selectedOptions;
+    const maxLimit = 3; // Maximum number of allowed selections
+    // If number of selected options exceeds the maximum limit, unselect the last selected option
+    if (selectedOptions.length > maxLimit) {
+      selectedOptions[selectedOptions.length - 1].selected = false;
+    }
+  });
+</script>
+
+<style>
+  /* Chrome, Safari, Edge, Opera */
+  #inputCookingTime::-webkit-outer-spin-button,
+  #inputCookingTime::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  #inputCookingTime[type="number"] {
+    -moz-appearance: textfield;
+  }
+  /* Chrome, Safari, Edge, Opera */
+  #inputPreparationTime::-webkit-outer-spin-button,
+  #inputPreparationTime::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  #inputPreparationTime[type="number"] {
+    -moz-appearance: textfield;
+  }
+  /* Chrome, Safari, Edge, Opera */
+  #inputServings::-webkit-outer-spin-button,
+  #inputServings::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  #inputServings[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  #inputInstructionsTime::-webkit-outer-spin-button,
+  #inputInstructionsTime::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  #inputInstructionsTime[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  #inputQuantity::-webkit-outer-spin-button,
+  #inputQuantity::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  #inputQuantity[type="number"] {
+    -moz-appearance: textfield;
+  }
+</style>

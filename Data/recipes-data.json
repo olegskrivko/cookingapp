@@ -1,0 +1,360 @@
+[
+  {
+    "title": "Spicy Garlic Shrimp Linguine",
+    "description": "This Spicy Garlic Shrimp Linguine is a quick and easy pasta dish that's perfect for weeknight dinners. The spicy garlic shrimp pairs perfectly with the linguine and creates a flavorful and satisfying meal.",
+    "ingredients": [
+      {
+        "name": "linguine",
+        "quantity": "1 pound"
+      },
+      {
+        "name": "olive oil",
+        "quantity": "1/4 cup"
+      },
+      {
+        "name": "garlic cloves",
+        "quantity": "4",
+        "optional": false
+      },
+      {
+        "name": "red pepper flakes",
+        "quantity": "1/2 teaspoon",
+        "optional": false
+      },
+      {
+        "name": "medium shrimp",
+        "quantity": "1 pound, peeled and deveined"
+      },
+      {
+        "name": "dry white wine",
+        "quantity": "1/4 cup"
+      },
+      {
+        "name": "salt",
+        "quantity": "to taste",
+        "optional": false
+      },
+      {
+        "name": "pepper",
+        "quantity": "to taste",
+        "optional": false
+      },
+      {
+        "name": "fresh parsley",
+        "quantity": "1/4 cup, chopped",
+        "optional": false
+      },
+      {
+        "name": "grated Parmesan cheese",
+        "quantity": "for serving",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      {
+        "step": "Cook the linguine according to package instructions until al dente. Drain and set aside."
+      },
+      {
+        "step": "While the pasta is cooking, heat the olive oil in a large skillet over medium-high heat. Add the garlic and red pepper flakes and cook for 1 minute."
+      },
+      {
+        "step": "Add the shrimp to the skillet and cook until pink and opaque, about 2-3 minutes per side."
+      },
+      {
+        "step": "Remove the shrimp from the skillet and set aside."
+      },
+      {
+        "step": "Add the white wine to the skillet and bring to a simmer. Cook until the wine has reduced by half, about 2-3 minutes."
+      },
+      {
+        "step": "Return the shrimp to the skillet and season with salt and pepper, to taste. Add the cooked linguine and toss to combine."
+      },
+      {
+        "step": "Sprinkle with fresh parsley and grated Parmesan cheese, to taste. Serve immediately."
+      }
+    ],
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "Easy",
+    "tags": ["pasta", "shrimp", "garlic", "spicy", "linguine"],
+    "cuisines": ["Italian"],
+    "mealTypes": ["Dinner"],
+    "allergens": ["Shellfish"],
+    "createdBy": "6163f3e79101f34d88d505a8",
+    "likes": [],
+    "dislikes": [],
+    "comments": [],
+    "image": "https://www.example.com/spicy-garlic-shrimp-linguine.jpg",
+    "createdAt": "2023-03-27T12:00:00.000Z",
+    "updatedAt": "2023-03-27T12:00:00.000Z"
+  },
+  {
+    "title": "Spaghetti Carbonara",
+    "description": "This classic Italian dish is quick, easy, and oh so delicious! Creamy eggs, salty bacon, and parmesan cheese create a perfect sauce for al dente spaghetti. ",
+    "ingredients": [
+      {
+        "name": "Spaghetti",
+        "quantity": "1 pound"
+      },
+      {
+        "name": "Bacon",
+        "quantity": "8 slices, chopped"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "3 cloves, minced"
+      },
+      {
+        "name": "Eggs",
+        "quantity": "4 large"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": "1 cup, grated"
+      },
+      {
+        "name": "Salt",
+        "quantity": "To taste"
+      },
+      {
+        "name": "Black pepper",
+        "quantity": "To taste"
+      }
+    ],
+    "instructions": [
+      {
+        "step": "Bring a large pot of salted water to a boil. Add the spaghetti and cook until al dente.",
+        "timer": null
+      },
+      {
+        "step": "While the spaghetti is cooking, cook the bacon in a large skillet over medium heat until crispy. Remove the bacon with a slotted spoon and set aside.",
+        "timer": null
+      },
+      {
+        "step": "Add the minced garlic to the bacon grease and cook for 1-2 minutes, until fragrant.",
+        "timer": null
+      },
+      {
+        "step": "In a separate bowl, whisk together the eggs and parmesan cheese.",
+        "timer": null
+      },
+      {
+        "step": "When the spaghetti is done cooking, reserve 1 cup of the pasta water and drain the rest. Return the spaghetti to the pot and place it back over low heat.",
+        "timer": null
+      },
+      {
+        "step": "Add the cooked bacon and garlic to the spaghetti and toss to combine.",
+        "timer": null
+      },
+      {
+        "step": "Remove the pot from the heat and add the egg mixture, stirring quickly to coat the spaghetti. If the sauce is too thick, add a little bit of the reserved pasta water to thin it out.",
+        "timer": null
+      },
+      {
+        "step": "Season with salt and black pepper to taste. Serve immediately, garnished with extra parmesan cheese and black pepper.",
+        "timer": null
+      }
+    ],
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "Easy",
+    "tags": ["pasta", "italian", "dinner", "easy"],
+    "cuisines": ["Italian"],
+    "mealTypes": ["Main Course"],
+    "allergens": ["Dairy", "Gluten"],
+    "createdBy": "614aeb1cfb4c8a73a0e2a4d1",
+    "likes": ["614aeb1cfb4c8a73a0e2a4d1", "614aeb1cfb4c8a73a0e2a4d2"],
+    "dislikes": [],
+    "comments": [
+      {
+        "user": "614aeb1cfb4c8a73a0e2a4d1",
+        "comment": "This was amazing, so easy to make!",
+        "createdAt": "2023-03-28T12:00:00.000Z"
+      }
+    ],
+
+    "image": "https://www.example.com/spicy-garlic-shrimp-linguine.jpg",
+    "createdAt": "2023-03-27T12:00:00.000Z",
+    "updatedAt": "2023-03-27T12:00:00.000Z"
+  }
+]
+
+
+
+
+
+
+
+
+{
+  "title": "Spaghetti Carbonara",
+  "description": "A classic Italian pasta dish made with bacon, eggs, and Parmesan cheese.",
+  "ingredients": [
+    {
+      "name": "spaghetti",
+      "quantity": 200,
+      "unit": "g",
+      "required": true
+    },
+    {
+      "name": "bacon",
+      "quantity": 150,
+      "unit": "g",
+      "required": true
+    },
+    {
+      "name": "eggs",
+      "quantity": 2,
+      "unit": "pcs",
+      "required": true
+    },
+    {
+      "name": "Parmesan cheese",
+      "quantity": 50,
+      "unit": "g",
+      "required": true
+    },
+    {
+      "name": "salt",
+      "quantity": 1,
+      "unit": "tsp",
+      "required": true
+    },
+    {
+      "name": "black pepper",
+      "quantity": 1,
+      "unit": "tsp",
+      "required": true
+    }
+  ],
+  "instructions": [
+    {
+      "step": "Cook the spaghetti according to the package instructions."
+    },
+    {
+      "step": "Meanwhile, cook the bacon in a pan until crispy."
+    },
+    {
+      "step": "In a bowl, beat together the eggs, Parmesan cheese, salt, and black pepper."
+    },
+    {
+      "step": "Drain the cooked spaghetti and add it to the pan with the bacon. Mix well."
+    },
+    {
+      "step": "Pour the egg mixture over the spaghetti and bacon. Stir continuously until the eggs are cooked and the sauce has thickened."
+    }
+  ],
+  "prepTime": 10,
+  "cookTime": 20,
+  "totalTime": 30,
+  "servings": 4,
+  "difficulty": "Medium",
+  "cuisines": ["Italian"],
+  "mealTypes": ["Main course"],
+  "dishTypes": ["Pasta"],
+  "allergens": ["Eggs"]
+}
+
+{
+  "title": "Decadent Chocolate Cake",
+  "description": "A rich and indulgent chocolate cake that's perfect for any occasion.",
+  "ingredients": [
+    {
+      "name": "All-purpose flour",
+      "quantity": 2.5,
+      "unit": "cups"
+    },
+    {
+      "name": "Granulated sugar",
+      "quantity": 2,
+      "unit": "cups"
+    },
+    {
+      "name": "Unsweetened cocoa powder",
+      "quantity": 1.5,
+      "unit": "cups"
+    },
+    {
+      "name": "Baking powder",
+      "quantity": 2,
+      "unit": "tsp"
+    },
+    {
+      "name": "Baking soda",
+      "quantity": 2,
+      "unit": "tsp"
+    },
+    {
+      "name": "Salt",
+      "quantity": 1,
+      "unit": "tsp"
+    },
+    {
+      "name": "Eggs",
+      "quantity": 3,
+      "unit": ""
+    },
+    {
+      "name": "Milk",
+      "quantity": 1.5,
+      "unit": "cups"
+    },
+    {
+      "name": "Vegetable oil",
+      "quantity": 0.75,
+      "unit": "cup"
+    },
+    {
+      "name": "Vanilla extract",
+      "quantity": 2,
+      "unit": "tsp"
+    },
+    {
+      "name": "Boiling water",
+      "quantity": 1,
+      "unit": "cup"
+    }
+  ],
+  "instructions": [
+    {
+      "step": "Preheat oven to 350°F (180°C). Grease and flour two 9-inch (23cm) round baking pans."
+    },
+    {
+      "step": "In a large bowl, whisk together flour, sugar, cocoa powder, baking powder, baking soda, and salt."
+    },
+    {
+      "step": "Add eggs, milk, oil, and vanilla extract. Beat with an electric mixer on medium speed for 2 minutes."
+    },
+    {
+      "step": "Stir in boiling water. The batter will be thin but don't worry!"
+    },
+    {
+      "step": "Pour the batter evenly into the prepared pans."
+    },
+    {
+      "step": "Bake for 30-35 minutes or until a toothpick inserted into the center comes out clean."
+    },
+    {
+      "step": "Cool the cakes in the pans for 10 minutes. Then remove them from the pans and cool completely on a wire rack."
+    }
+  ],
+  "prepTime": 20,
+  "cookTime": 35,
+  "totalTime": 55,
+  "servings": 12,
+  "difficulty": "Medium",
+  "cuisines": ["American"],
+  "mealTypes": ["Desserts"],
+  "dishTypes": ["Cake"],
+  "allergens": ["Gluten"],
+  "image": {
+    "url": "https://res.cloudinary.com/your-cloud-name/image/upload/v1234567890/image-name.jpg",
+    "id": "image-id"
+  },
+  "createdAt": "2023-04-24T15:00:00.000Z",
+  "updatedAt": "2023-04-24T15:00:00.000Z"
+}
+
+
