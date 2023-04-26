@@ -12,7 +12,7 @@ const {
 } = require("../utils/recipeOptions");
 
 exports.getAllRecipes = catchAsync(async (req, res, next) => {
-  const ITEMS_PER_PAGE = 9; // Number of items to display per page
+  const ITEMS_PER_PAGE = 6; // Number of items to display per page
   const { page, limit, search, totalTime, mealTypes, dishTypes, cuisines } = req.query;
 
   // Validate and sanitize input parameters

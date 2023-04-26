@@ -18,7 +18,7 @@
           <div class="card shadow-sm">
             <img src="<%=recipe.image.url%>" alt="<%=recipe.title%>"/>
             <div class="card-body">
-              <p class="card-title" style="text-transform: capitalize"><b><%=recipe.title%></b></p>
+              <p class="card-title small" style="text-transform: capitalize"><b><%=recipe.title%></b></p>
               <div class="d-flex justify-content-between align-items-center">
                 <small class="text-body-secondary"><i class="bi bi-alarm"></i> <%=recipe.totalTime%> mins</small>
               </div>
@@ -99,7 +99,7 @@
         <!-- PAGINATION -->
     <nav class="mt-5" aria-label="Page navigation">
       <ul class="pagination justify-content-center">
-        <li class="page-item me-5 custom-page-link prev">
+        <li class="page-item custom-page-link prev">
           <a style="border: none" class="page-link custom-page-link <%= currentPage <= 1 ? 'disabled' : '' %>" href="/api/recipes?page=<%= currentPage - 1  %>&limit=<%= limitPerPage %>" aria-label="Previous">
             <span aria-hidden="true"><i class="bi bi-caret-left-fill"></i>Prev</span>
           </a>
@@ -113,7 +113,7 @@
         <li class="page-item">
           <p class="page-link custom-pagination disabled" >of <span class="total-pages"><%=totalPages%></span></p>
         </li>
-        <li class="page-item me-5">
+        <li class="page-item">
           <button class="btn btn-warning pagination-btn">Go</button>
         </li>
         <li class="page-item custom-page-link next">
@@ -126,6 +126,8 @@
   </div>
   <div class="col-md-3"></div>
 </div>
+
+
 
 
 <script>
@@ -142,6 +144,8 @@
   let prev = document.querySelector(".prev");
   let next = document.querySelector(".next");
 
+
+
   function saveFiltersToLocaleStorage() {
     filterRecipeTitle = document.querySelector("#searchTitle").value;
     filterMealType = document.querySelector("#mealType").value;
@@ -153,6 +157,7 @@
     const filterOptionsState = { filterRecipeTitle, filterMealType, filterDishType, filterCuisine, filterTotalCookingTime};
     localStorage.setItem('filterOptionsState', JSON.stringify(filterOptionsState));
   }
+
   //jasalabo
   //saveFiltersToLocaleStorage()
 
@@ -162,6 +167,7 @@
       // Remove the item from the local storage
       localStorage.removeItem("filterOptionsState");
       console.log("Filters removed from the local storage.");
+
     } 
   }
 
@@ -180,11 +186,12 @@
   resetFormBtn.addEventListener("click", () => {
     removeFiltersFromLocaleStorage()
     clearFormFilterValues()
+  
   })
 
     // Store pagination state
     let currentPage = 1;
-    const pageSize = 9;
+    const pageSize = 6;
     const paginationState = { currentPage, pageSize };
     //localStorage.setItem('paginationState', JSON.stringify(paginationState));
 
@@ -195,11 +202,19 @@
       let customPaginationValue = document.querySelector(".custom-pagination-value").value
       customPaginationValue ++
       // Retrieve filter options
+      if (localStorage.getItem('filterOptionsState')) {
       let filterOptions = JSON.parse(localStorage.getItem('filterOptionsState'));
       let currentUrl = window.location.href;
       let startURL = currentUrl.split('?')[0];
       let urltogo = startURL + `?page=${encodeURI(customPaginationValue)}&limit=${encodeURI(pageSize)}&search=${encodeURI(filterOptions.filterRecipeTitle)}&mealTypes=${encodeURI(filterOptions.filterMealType)}&dishTypes=${encodeURI(filterOptions.filterDishType)}&cuisines=${encodeURI(filterOptions.filterCuisine)}&totalTime=${encodeURI(filterOptions.filterTotalCookingTime)}`
       window.location.href = urltogo
+      } else {
+        let currentUrl = window.location.href;
+      let startURL = currentUrl.split('?')[0];
+      let urltogo = startURL + `?page=${encodeURI(customPaginationValue)}&limit=${encodeURI(pageSize)}`
+      window.location.href = urltogo
+
+      }
     })
 
     prev.addEventListener('click', (e) => {
@@ -209,46 +224,47 @@
       let customPaginationValue = document.querySelector(".custom-pagination-value").value
       customPaginationValue --
      // Retrieve filter options
-     let filterOptions = JSON.parse(localStorage.getItem('filterOptionsState'));
-     let currentUrl = window.location.href;
-     let startURL = currentUrl.split('?')[0];
-     let urltogo = startURL + `?page=${encodeURI(customPaginationValue)}&limit=${encodeURI(pageSize)}&search=${encodeURI(filterOptions.filterRecipeTitle)}&mealTypes=${encodeURI(filterOptions.filterMealType)}&dishTypes=${encodeURI(filterOptions.filterDishType)}&cuisines=${encodeURI(filterOptions.filterCuisine)}&totalTime=${encodeURI(filterOptions.filterTotalCookingTime)}`
-     window.location.href = urltogo
+     if (localStorage.getItem('filterOptionsState')) {
+      let filterOptions = JSON.parse(localStorage.getItem('filterOptionsState'));
+      let currentUrl = window.location.href;
+      let startURL = currentUrl.split('?')[0];
+      let urltogo = startURL + `?page=${encodeURI(customPaginationValue)}&limit=${encodeURI(pageSize)}&search=${encodeURI(filterOptions.filterRecipeTitle)}&mealTypes=${encodeURI(filterOptions.filterMealType)}&dishTypes=${encodeURI(filterOptions.filterDishType)}&cuisines=${encodeURI(filterOptions.filterCuisine)}&totalTime=${encodeURI(filterOptions.filterTotalCookingTime)}`
+      window.location.href = urltogo
+     } else {
+      let currentUrl = window.location.href;
+      let startURL = currentUrl.split('?')[0];
+      let urltogo = startURL + `?page=${encodeURI(customPaginationValue)}&limit=${encodeURI(pageSize)}`
+      window.location.href = urltogo
+     }
+     
     })
 
-    paginationBtn.addEventListener("click", () => {
-
+    paginationBtn.addEventListener("click", (e) => {
+      e.preventDefault()
       let customPaginationValue = document.querySelector(".custom-pagination-value").value
       // Retrieve filter options
+      if (localStorage.getItem('filterOptionsState')) {
       let filterOptions = JSON.parse(localStorage.getItem('filterOptionsState'));
 
       let currentUrl = window.location.href;
       let startURL = currentUrl.split('?')[0];
       console.log("startURL", startURL)
-      console.log(thefilters)
 
 
       let urltogo = startURL + `?page=${encodeURI(customPaginationValue)}&limit=${encodeURI(pageSize)}&search=${encodeURI(filterOptions.filterRecipeTitle)}&mealTypes=${encodeURI(filterOptions.filterMealType)}&dishTypes=${encodeURI(filterOptions.filterDishType)}&cuisines=${encodeURI(filterOptions.filterCuisine)}&totalTime=${encodeURI(filterOptions.filterTotalCookingTime)}`
       window.location.href = urltogo
-      
-      // Remove query parameters from the URL
-      //let cleanUrl = currentUrl.split('?')[1];
+      } else {
 
-      
-      // http://localhost:3000/api/recipes?search=sweet&mealTypes=Brunch&dishTypes=Side+Dish&cuisines=Asian+cuisine&totalTime=90
-      //let cleanUrl2 = currentUrl.split('?')[1];
-      //let cleanUrl1 = currentUrl.split('?')[0];
-      //console.log('1', cleanUrl1)
-      //1 http://localhost:3000/api/recipes
-      
-      //console.log('2', cleanUrl2)
-      //2 search=sweet&mealTypes=Brunch&dishTypes=Side+Dish&cuisines=Asian+cuisine&totalTime=90
-      
+      let currentUrl = window.location.href;
+      let startURL = currentUrl.split('?')[0];
+      console.log("startURL", startURL)
 
-      //let newUrl = `?recipes&page=${encodeURI(customPagination)}&limit=${encodeURI(pageSize)}&search=${encodeURI(filterOptions.filterRecipeTitle)}&mealTypes=${encodeURI(filterOptions.filterMealType)}&dishTypes=${encodeURI(filterOptions.filterDishType)}&cuisines=${encodeURI(filterOptions.filterCuisine)}&totalTime=${encodeURI(filterOptions.filterTotalCookingTime)}`
 
-      // Redirect to the clean URL
-      //window.location.href = newUrl;
+      let urltogo = startURL + `?page=${encodeURI(customPaginationValue)}&limit=${encodeURI(pageSize)}`
+      window.location.href = urltogo
+      }
+      
+      
 
     })
 

@@ -173,7 +173,7 @@
         </div>
 
         <div class="col-md-12">
-          <div class="row row-cols-3 row-cols-md-5 g-4">
+          <div class="row row-cols-2 row-cols-md-5 row-cols-sm-2 g-4">
             <div class="col">
               <div class="card h-65 pt-3" style="background-color: #333333">
                 <div class="mx-auto">
@@ -400,10 +400,13 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3" style="background-color: #333333">
-      <h6 class="text-muted text-center mt-3">Advertisment</h6>
-      <!-- <div class="card mb-3 m-2" style="max-width: 540px">
-        <div class="row g-0">
+    <div
+      class="col-md-3 d-none d-md-block"
+      style="background-color: #333333; height: 100vh; overflow: scroll"
+    >
+      <h6 class="text-muted text-center mt-3">News</h6>
+      <div class="card mb-3 m-2" id="news" style="max-width: 540px">
+        <!-- <div class="row g-0 news-container">
           <div
             class="col-md-5"
             style="
@@ -419,84 +422,8 @@
               </h6>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
-      <div class="card mb-3 m-2" style="max-width: 540px">
-        <div class="row g-0">
-          <div
-            class="col-md-5"
-            style="
-              background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80');
-              background-size: cover;
-              background-position: center;
-            "
-          ></div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <h6 class="card-title">
-                This is a wider card with supporting text below as a natural
-              </h6>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3 m-2" style="max-width: 540px">
-        <div class="row g-0">
-          <div
-            class="col-md-5"
-            style="
-              background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80');
-              background-size: cover;
-              background-position: center;
-            "
-          ></div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <h6 class="card-title">
-                This is a wider card with supporting text below as a natural
-              </h6>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3 m-2" style="max-width: 540px">
-        <div class="row g-0">
-          <div
-            class="col-md-5"
-            style="
-              background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80');
-              background-size: cover;
-              background-position: center;
-            "
-          ></div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <h6 class="card-title">
-                This is a wider card with supporting text below as a natural
-              </h6>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3 m-2" style="max-width: 540px">
-        <div class="row g-0">
-          <div
-            class="col-md-5"
-            style="
-              background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80');
-              background-size: cover;
-              background-position: center;
-            "
-          ></div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <h6 class="card-title">
-                This is a wider card with supporting text below as a natural
-              </h6>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </div>
@@ -712,4 +639,36 @@
       plusIngredientsAmount();
     }
   });
+</script>
+
+<script>
+  let myapi = "fAIEjAG8og3akdWlK5D8P9phe8h0cl6P";
+  // Fetch news data
+  fetch(`https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${myapi}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const results = data.results;
+      const newsList = document.getElementById("news");
+      results.forEach((article) => {
+        let newsImg = article.media[0]["media-metadata"][1].url;
+        const newsContainer = document.createElement("article");
+        newsContainer.classList.add("row", "g-0", "news-container", "p-3");
+        const newsItem = document.createElement("img");
+        newsItem.style.width = "100%";
+        newsItem.style.height = "auto";
+        newsItem.classList.add("col-md-5");
+        newsItem.setAttribute("src", `${newsImg}`);
+        newsItem.setAttribute("target", `_blank`);
+        newsContainer.appendChild(newsItem);
+        const newsLink = document.createElement("a");
+        newsLink.setAttribute("href", article.url);
+        const title = document.createElement("h6");
+        title.innerText = article.title;
+        newsLink.appendChild(title);
+        newsContainer.appendChild(newsLink);
+
+        newsList.appendChild(newsContainer);
+      });
+    })
+    .catch((error) => console.error(error));
 </script>

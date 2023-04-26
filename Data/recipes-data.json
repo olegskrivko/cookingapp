@@ -358,3 +358,867 @@
 }
 
 
+{
+  "title": "Strawberry Cheesecake",
+  "description": "Creamy and delicious cheesecake topped with fresh strawberries.",
+  "ingredients": [
+    {
+      "name": "Graham crackers",
+      "quantity": 200,
+      "unit": "g"
+    },
+    {
+      "name": "Unsalted butter",
+      "quantity": 100,
+      "unit": "g"
+    },
+    {
+      "name": "Cream cheese",
+      "quantity": 500,
+      "unit": "g"
+    },
+    {
+      "name": "Granulated sugar",
+      "quantity": 200,
+      "unit": "g"
+    },
+    {
+      "name": "Sour cream",
+      "quantity": 240,
+      "unit": "g"
+    },
+    {
+      "name": "Vanilla extract",
+      "quantity": 2,
+      "unit": "tsp"
+    },
+    {
+      "name": "Eggs",
+      "quantity": 3,
+      "unit": "pcs"
+    },
+    {
+      "name": "Strawberries",
+      "quantity": 300,
+      "unit": "g"
+    },
+    {
+      "name": "Powdered sugar",
+      "quantity": 2,
+      "unit": "tbsp"
+    }
+  ],
+  "instructions": [
+    {
+      "step": "Preheat oven to 325°F (165°C)."
+    },
+    {
+      "step": "In a food processor, pulse graham crackers into fine crumbs. Add melted butter and pulse until combined."
+    },
+    {
+      "step": "Press the mixture into the bottom of a 9-inch (23cm) springform pan."
+    },
+    {
+      "step": "In a large mixing bowl, beat cream cheese until smooth. Add sugar, sour cream, and vanilla extract. Beat until well combined."
+    },
+    {
+      "step": "Add eggs one at a time, beating well after each addition."
+    },
+    {
+      "step": "Pour the mixture over the crust in the prepared pan."
+    },
+    {
+      "step": "Bake for 45-50 minutes, or until the edges are set and the center is slightly jiggly."
+    },
+    {
+      "step": "Remove from oven and let cool completely. Refrigerate for at least 4 hours or overnight."
+    },
+    {
+      "step": "When ready to serve, slice strawberries and arrange them on top of the cheesecake. Sprinkle with powdered sugar."
+    }
+  ],
+  "prepTime": 30,
+  "cookTime": 50,
+  "totalTime": 300,
+  "servings": 12,
+  "difficulty": "Medium",
+  "cuisines": [
+    "American"
+  ],
+  "mealTypes": [
+    "Dessert"
+  ],
+  "dishTypes": [
+    "Cheesecake"
+  ],
+  "allergens": [
+    "Dairy",
+    "Eggs",
+    "Gluten"
+  ]
+}
+//////
+
+{
+  "title": "Mojito",
+  "description": "A refreshing cocktail made with rum, lime, mint, and soda water.",
+  "ingredients": [
+    {
+      "name": "Fresh mint leaves",
+      "quantity": 10,
+      "unit": "leaves"
+    },
+    {
+      "name": "Fresh lime",
+      "quantity": 1,
+      "unit": "unit"
+    },
+    {
+      "name": "Granulated sugar",
+      "quantity": 1,
+      "unit": "tbsp"
+    },
+    {
+      "name": "White rum",
+      "quantity": 2,
+      "unit": "oz"
+    },
+    {
+      "name": "Club soda",
+      "quantity": 2,
+      "unit": "oz"
+    },
+    {
+      "name": "Ice",
+      "quantity": 1,
+      "unit": "cup"
+    }
+  ],
+  "instructions": [
+    {
+      "step": "Cut the lime into wedges and add them to a tall glass along with the mint leaves and sugar. Use a muddler or the back of a spoon to crush the mint and lime together, releasing their juices and oils."
+    },
+    {
+      "step": "Fill the glass with ice, then pour in the rum and club soda. Stir well to combine."
+    },
+    {
+      "step": "Garnish with additional mint leaves and a lime wedge. Serve immediately."
+    }
+  ],
+  "prepTime": 10,
+  "cookTime": 0,
+  "totalTime": 10,
+  "servings": 1,
+  "difficulty": "Easy",
+  "cuisines": [
+    "Cuban",
+    "Caribbean"
+  ],
+  "mealTypes": [
+    "Beverage",
+    "Cocktail"
+  ],
+  "dishTypes": [],
+  "allergens": []
+}
+
+
+////////
+{
+  "title": "Margarita Cocktail",
+  "description": "A classic, refreshing cocktail made with tequila, lime juice, and orange liqueur.",
+  "ingredients": [
+    {
+      "name": "Tequila",
+      "quantity": 2,
+      "unit": "oz",
+      "required": true
+    },
+    {
+      "name": "Freshly squeezed lime juice",
+      "quantity": 1,
+      "unit": "oz",
+      "required": true
+    },
+    {
+      "name": "Orange liqueur (such as Triple Sec or Cointreau)",
+      "quantity": 1,
+      "unit": "oz",
+      "required": true
+    },
+    {
+      "name": "Ice",
+      "quantity": 1,
+      "unit": "cup",
+      "required": true
+    },
+    {
+      "name": "Salt",
+      "quantity": null,
+      "unit": null,
+      "required": true
+    },
+    {
+      "name": "Lime wedge",
+      "quantity": null,
+      "unit": null,
+      "required": true
+    }
+  ],
+  "instructions": [
+    {
+      "step": "Rub the rim of a rocks glass with a lime wedge, and dip it in salt to coat the rim."
+    },
+    {
+      "step": "Fill a cocktail shaker with ice, then add the tequila, lime juice, and orange liqueur."
+    },
+    {
+      "step": "Shake vigorously for about 15 seconds, then strain the cocktail into the salt-rimmed glass over fresh ice."
+    },
+    {
+      "step": "Garnish with a lime wedge and serve immediately."
+    }
+  ],
+  "prepTime": 5,
+  "cookTime": 0,
+  "totalTime": 5,
+  "servings": 1,
+  "difficulty": "Easy",
+  "cuisines": [
+    "Mexican"
+  ],
+  "mealTypes": [
+    "Beverage"
+  ],
+  "dishTypes": [
+    "Cocktail"
+  ],
+  "allergens": []
+}
+//////////
+{
+  "title": "Classic Vanilla Milkshake",
+  "description": "A classic milkshake made with vanilla ice cream and whole milk.",
+  "ingredients": [
+    {
+      "name": "Vanilla ice cream",
+      "quantity": 2,
+      "unit": "scoops"
+    },
+    {
+      "name": "Whole milk",
+      "quantity": 1,
+      "unit": "cup"
+    },
+    {
+      "name": "Whipped cream",
+      "quantity": 2,
+      "unit": "tbsp",
+      "required": false
+    },
+    {
+      "name": "Maraschino cherry",
+      "quantity": 1,
+      "unit": "pcs",
+      "required": false
+    }
+  ],
+  "instructions": [
+    {
+      "step": "Add the vanilla ice cream and whole milk to a blender."
+    },
+    {
+      "step": "Blend until smooth and creamy."
+    },
+    {
+      "step": "Pour into a glass."
+    },
+    {
+      "step": "Top with whipped cream and a maraschino cherry, if desired."
+    }
+  ],
+  "prepTime": 5,
+  "cookTime": 0,
+  "totalTime": 5,
+  "servings": 1,
+  "difficulty": "Easy",
+  "cuisines": ["American"],
+  "mealTypes": ["Beverage"],
+  "dishTypes": ["Drink"],
+  "allergens": ["Milk"]
+}
+/////
+{
+  "title": "Banana Oat Protein Shake",
+  "description": "A delicious and healthy protein shake that's perfect for post-workout recovery or as a quick breakfast.",
+  "ingredients": [
+    {
+      "name": "Banana",
+      "quantity": 1,
+      "unit": "medium",
+      "required": true
+    },
+    {
+      "name": "Oats",
+      "quantity": 1/2,
+      "unit": "cup",
+      "required": true
+    },
+    {
+      "name": "Vanilla protein powder",
+      "quantity": 1,
+      "unit": "scoop",
+      "required": true
+    },
+    {
+      "name": "Almond milk",
+      "quantity": 1,
+      "unit": "cup",
+      "required": true
+    },
+    {
+      "name": "Ice",
+      "quantity": 1,
+      "unit": "cup",
+      "required": false
+    }
+  ],
+  "instructions": [
+    {
+      "step": "Add all the ingredients into a blender."
+    },
+    {
+      "step": "Blend until smooth and creamy."
+    },
+    {
+      "step": "Pour into a glass and enjoy!"
+    }
+  ],
+  "prepTime": 5,
+  "cookTime": 0,
+  "totalTime": 5,
+  "servings": 1,
+  "difficulty": "Easy",
+  "cuisines": [
+    "American"
+  ],
+  "mealTypes": [
+    "Beverage"
+  ],
+  "dishTypes": [],
+  "allergens": [
+    "Nuts"
+  ]
+}
+
+/////
+{
+  "title": "Chocolate Peanut Butter Protein Smoothie",
+  "description": "A delicious and healthy smoothie packed with protein, chocolate, and peanut butter!",
+  "ingredients": [
+    {
+      "name": "Banana",
+      "quantity": 1,
+      "unit": "pcs",
+      "required": true
+    },
+    {
+      "name": "Chocolate protein powder",
+      "quantity": 1,
+      "unit": "scoop",
+      "required": true
+    },
+    {
+      "name": "Peanut butter",
+      "quantity": 2,
+      "unit": "tbsp",
+      "required": true
+    },
+    {
+      "name": "Almond milk",
+      "quantity": 1,
+      "unit": "cup",
+      "required": true
+    },
+    {
+      "name": "Ice cubes",
+      "quantity": 1,
+      "unit": "cup",
+      "required": false
+    }
+  ],
+  "instructions": [
+    {
+      "step": "Add all ingredients to a blender."
+    },
+    {
+      "step": "Blend until smooth and creamy."
+    },
+    {
+      "step": "Pour into a glass and enjoy!"
+    }
+  ],
+  "prepTime": 5,
+  "cookTime": 0,
+  "totalTime": 5,
+  "servings": 1,
+  "difficulty": "Easy",
+  "cuisines": ["American"],
+  "mealTypes": ["Beverage"],
+  "dishTypes": [],
+  "allergens": ["Peanuts"]
+}
+
+{
+  "title": "Vegan Berry Cocktail",
+  "description": "A delicious and refreshing vegan cocktail made with fresh berries.",
+  "ingredients": [
+    {
+      "name": "Frozen mixed berries",
+      "quantity": 2,
+      "unit": "cups"
+    },
+    {
+      "name": "Banana",
+      "quantity": 1,
+      "unit": "large",
+      "required": false
+    },
+    {
+      "name": "Orange juice",
+      "quantity": 1,
+      "unit": "cup"
+    },
+    {
+      "name": "Almond milk",
+      "quantity": 1,
+      "unit": "cup"
+    },
+    {
+      "name": "Vanilla protein powder",
+      "quantity": 2,
+      "unit": "scoops"
+    },
+    {
+      "name": "Ice",
+      "quantity": 1,
+      "unit": "cup"
+    }
+  ],
+  "instructions": [
+    {
+      "step": "Add the frozen berries, banana, orange juice, almond milk, protein powder, and ice to a blender."
+    },
+    {
+      "step": "Blend until smooth and creamy."
+    },
+    {
+      "step": "Pour into a glass and enjoy!"
+    }
+  ],
+  "prepTime": 5,
+  "cookTime": 0,
+  "totalTime": 5,
+  "servings": 2,
+  "difficulty": "Easy",
+  "mealTypes": [
+    "Beverage",
+    "Snack"
+  ],
+  "dietary": {
+    "vegan": true,
+    "glutenFree": true
+  },
+  "tags": [
+    "Vegan",
+    "Smoothie",
+    "Protein",
+    "Fruit"
+  ]
+}
+/////
+{
+  "title": "Honey Cake",
+  "description": "A deliciously moist and fluffy cake, infused with the rich flavor of honey.",
+  "ingredients": [
+  {
+  "name": "all-purpose flour",
+  "quantity": 2.5,
+  "unit": "cups"
+  },
+  {
+  "name": "baking powder",
+  "quantity": 2,
+  "unit": "tsp"
+  },
+  {
+  "name": "baking soda",
+  "quantity": 1",
+  "unit": "tsp"
+  },
+  {
+  "name": "ground cinnamon",
+  "quantity": 2",
+  "unit": "tsp"
+  },
+  {
+  "name": "salt",
+  "quantity": 1",
+  "unit": "tsp"
+  },
+  {
+  "name": "eggs",
+  "quantity": 4,
+  "unit": "large"
+  },
+  {
+  "name": "vegetable oil",
+  "quantity": 1",
+  "unit": "cup"
+  },
+  {
+  "name": "honey",
+  "quantity": 1",
+  "unit": "cup"
+  },
+  {
+  "name": "granulated sugar",
+  "quantity": 1",
+  "unit": "cup"
+  },
+  {
+  "name": "vanilla extract",
+  "quantity": 2",
+  "unit": "tsp"
+  },
+  {
+  "name": "hot water",
+  "quantity": 1",
+  "unit": "cup"
+  }
+  ],
+  "instructions": [
+  {
+  "step": "Preheat the oven to 350°F (180°C). Grease a 9-inch (23cm) cake pan and set aside."
+  },
+  {
+  "step": "In a large mixing bowl, sift together the flour, baking powder, baking soda, cinnamon, and salt."
+  },
+  {
+  "step": "In another mixing bowl, beat the eggs until light and frothy. Add in the vegetable oil, honey, granulated sugar, and vanilla extract. Mix well."
+  },
+  {
+  "step": "Add the wet ingredients to the dry ingredients and mix until well combined."
+  },
+  {
+  "step": "Stir in the hot water and mix well. The batter will be thin."
+  },
+  {
+  "step": "Pour the batter into the prepared cake pan and bake for 40-45 minutes, or until a toothpick inserted into the center of the cake comes out clean."
+  },
+  {
+  "step": "Remove the cake from the oven and let it cool in the pan for 10 minutes. Then, remove the cake from the pan and let it cool completely on a wire rack."
+  }
+  ],
+  "prepTime": 20,
+  "cookTime": 45,
+  "totalTime": 65,
+  "servings": 12,
+  "difficulty": "Medium",
+  "cuisines": [
+  "International",
+  "Jewish"
+  ],
+  "mealTypes": [
+  "Desserts",
+  "Snacks"
+  ],
+  "dishTypes": [
+  "Cake",
+  "Baked Goods"
+  ],
+  "allergens": [
+  "Eggs",
+  "Wheat"
+  ]
+  }
+
+  ////
+  {
+    "title": "Classic Lasagna",
+    "description": "A classic lasagna recipe that everyone will love!",
+    "ingredients": [
+      {
+        "name": "Lasagna noodles",
+        "quantity": 12,
+        "unit": "pcs",
+        "required": true
+      },
+      {
+        "name": "Ground beef",
+        "quantity": 1,
+        "unit": "lb",
+        "required": true
+      },
+      {
+        "name": "Garlic",
+        "quantity": 2,
+        "unit": "cloves",
+        "required": true
+      },
+      {
+        "name": "Onion",
+        "quantity": 1,
+        "unit": "medium",
+        "required": true
+      },
+      {
+        "name": "Tomato sauce",
+        "quantity": 1,
+        "unit": "can",
+        "required": true
+      },
+      {
+        "name": "Canned diced tomatoes",
+        "quantity": 1,
+        "unit": "can",
+        "required": true
+      },
+      {
+        "name": "Italian seasoning",
+        "quantity": 2,
+        "unit": "tsp",
+        "required": true
+      },
+      {
+        "name": "Salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "required": true
+      },
+      {
+        "name": "Pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "required": true
+      },
+      {
+        "name": "Ricotta cheese",
+        "quantity": 1,
+        "unit": "lb",
+        "required": true
+      },
+      {
+        "name": "Egg",
+        "quantity": 1,
+        "unit": "large",
+        "required": true
+      },
+      {
+        "name": "Mozzarella cheese",
+        "quantity": 2,
+        "unit": "cups",
+        "required": true
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 1,
+        "unit": "cup",
+        "required": true
+      },
+      {
+        "name": "Fresh parsley",
+        "quantity": 2,
+        "unit": "tbsp",
+        "required": false
+      }
+    ],
+    "instructions": [
+      {
+        "step": "Preheat oven to 375°F (190°C)."
+      },
+      {
+        "step": "Bring a large pot of salted water to a boil. Add lasagna noodles and cook for 8 to 10 minutes or until al dente. Drain and set aside."
+      },
+      {
+        "step": "In a large skillet, cook ground beef over medium heat until browned. Add garlic and onion and cook for an additional 2 to 3 minutes or until onion is tender. Drain fat."
+      },
+      {
+        "step": "Stir in tomato sauce, canned diced tomatoes, Italian seasoning, salt and pepper. Bring to a boil, reduce heat and simmer for 10 minutes."
+      },
+      {
+        "step": "In a medium bowl, combine ricotta cheese and egg."
+      },
+      {
+        "step": "Spread 1/2 cup of meat sauce in the bottom of a 9x13 inch baking dish. Arrange 4 lasagna noodles over meat sauce. Spread with one-third of the ricotta cheese mixture. Top with one-third of the mozzarella cheese. Spoon one-third of the meat sauce over the cheese. Repeat layers twice."
+      },
+     
+//////
+
+{
+  "title": "Vegetable Lasagna",
+  "description": "A delicious and healthy lasagna recipe made with fresh vegetables and creamy béchamel sauce.",
+  "ingredients": [
+    {
+      "name": "lasagna noodles",
+      "quantity": 12,
+      "unit": "pcs"
+    },
+    {
+      "name": "olive oil",
+      "quantity": 2,
+      "unit": "tbsp"
+    },
+    {
+      "name": "garlic cloves",
+      "quantity": 2,
+      "unit": "pcs"
+    },
+    {
+      "name": "onion",
+      "quantity": 1,
+      "unit": "pc"
+    },
+    {
+      "name": "zucchini",
+      "quantity": 1,
+      "unit": "pc"
+    },
+    {
+      "name": "eggplant",
+      "quantity": 1,
+      "unit": "pc"
+    },
+    {
+      "name": "red bell pepper",
+      "quantity": 1,
+      "unit": "pc"
+    },
+    {
+      "name": "yellow bell pepper",
+      "quantity": 1,
+      "unit": "pc"
+    },
+    {
+      "name": "spinach",
+      "quantity": 2,
+      "unit": "cups"
+    },
+    {
+      "name": "ricotta cheese",
+      "quantity": 2,
+      "unit": "cups"
+    },
+    {
+      "name": "parmesan cheese",
+      "quantity": 1,
+      "unit": "cup"
+    },
+    {
+      "name": "mozzarella cheese",
+      "quantity": 2,
+      "unit": "cups"
+    },
+    {
+      "name": "all-purpose flour",
+      "quantity": 4,
+      "unit": "tbsp"
+    },
+    {
+      "name": "unsalted butter",
+      "quantity": 4,
+      "unit": "tbsp"
+    },
+    {
+      "name": "milk",
+      "quantity": 3,
+      "unit": "cups"
+    },
+    {
+      "name": "nutmeg",
+      "quantity": 1,
+      "unit": "tsp"
+    },
+    {
+      "name": "salt",
+      "quantity": 1,
+      "unit": "tsp"
+    },
+    {
+      "name": "black pepper",
+      "quantity": 1,
+      "unit": "tsp"
+    }
+  ],
+  "instructions": [
+    {
+      "step": "Preheat the oven to 375°F (190°C)."
+    },
+    {
+      "step": "Bring a large pot of salted water to a boil. Cook lasagna noodles according to package instructions until al dente. Drain and set aside."
+    },
+    {
+      "step": "In a large skillet over medium-high heat, heat olive oil. Add garlic and onion and cook until onion is translucent, about 5 minutes."
+    },
+    {
+      "step": "Add zucchini, eggplant, red and yellow bell peppers to the skillet and cook until vegetables are tender, about 10 minutes."
+    },
+    {
+      "step": "Add spinach to the skillet and cook until wilted, about 2 minutes."
+    },
+    {
+      "step": "In a separate bowl, mix together ricotta cheese, parmesan cheese, and salt and black pepper to taste."
+    },
+    {
+      "step": "In a saucepan over medium heat, melt unsalted butter. Add all
+
+
+
+      Instructions:
+
+    Preheat the oven to 375°F (190°C).
+
+    In a large pot of boiling water, cook the lasagna noodles according to the package directions. Drain and rinse with cold water.
+
+    In a large skillet, heat the olive oil over medium heat. Add the garlic and cook for 1-2 minutes, until fragrant.
+
+    Add the onion and cook for 2-3 minutes, until softened.
+
+    Add the sliced mushrooms and cook for 5-7 minutes, until tender and golden.
+
+    Add the zucchini, yellow squash, and bell pepper to the skillet. Cook for 5-7 minutes, until the vegetables are tender and lightly browned.
+
+    Stir in the canned tomatoes, tomato paste, dried basil, dried oregano, salt, and black pepper. Bring the mixture to a simmer and cook for 10-15 minutes, until the sauce has thickened slightly.
+
+    In a medium bowl, combine the ricotta cheese, shredded mozzarella cheese, grated Parmesan cheese, and chopped fresh parsley.
+
+    Spread a layer of the vegetable mixture in the bottom of a 9x13 inch baking dish. Top with a layer of lasagna noodles, followed by a layer of the cheese mixture. Repeat the layers until all of the ingredients are used up, ending with a layer of the vegetable mixture.
+
+    Cover the baking dish with aluminum foil and bake for 30 minutes.
+
+    Remove the foil and bake for an additional 15-20 minutes, until the cheese is golden brown and bubbly.
+
+    Let the lasagna cool for 10-15 minutes before slicing and serving. Enjoy!
+
+    "prepTime": 20,
+  "cookTime": 45,
+  "totalTime": 65,
+  "servings": 12,
+  "difficulty": "Medium",
+  "cuisines": [
+    "International",
+    "Jewish"
+  ],
+  "mealTypes": [
+    "Dinner",
+    "Lunch"
+  ],
+  "dishTypes": [
+    "Pasta",
+    "Casserole"
+  ],
+  "allergens": [
+    "Eggs",
+    "Wheat",
+    "Dairy"
+  ],
