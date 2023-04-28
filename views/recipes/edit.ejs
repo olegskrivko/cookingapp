@@ -203,24 +203,24 @@
 
 
   <div class="col-md-12">
-    <label for="inputImage" class="form-label">Add image</label>
+    <label for="inputImage" class="form-label">Replace image</label>
+
     <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1"
-        ><i class="bi bi-image"></i></span>
-    <input type="file" class="form-control" id="inputImage" value="<%=recipe.image.url%>" name="image" />
+      <span class="input-group-text"><i class="bi bi-image"></i></span>
+    <input type="file" class="form-control" id="inputImage"  name="image" />
     </div>
+
     <div class="mb-3">
-      
       <img src="<%=recipe.image.thumbnail %>" class="img-thumbnail" alt="" />
       <div class="form-check-inline">
         <input
-          type="checkbox"
-          name="deleteImages[]"
+        type="hidden"
+          type="text"
+          name="deleteImage"
           value="<%=recipe.image.filename%>"
           id="image"
         />
       </div>
-      <label for="image">Delete?</label>
     </div>
   </div>
 

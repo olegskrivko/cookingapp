@@ -112,8 +112,6 @@ exports.renderEditForm = catchAsync(async (req, res) => {
 
 exports.createRecipe = catchAsync(async (req, res, next) => {
   const image = req.file;
-  //console.log(image);
-  const imageFormated = { url: image.path, filename: image.filename };
 
   const ingredientsInputFields = req.body.ingredients;
   // count ingredient name to know how many checkboxes expect, then loop
@@ -140,7 +138,6 @@ exports.createRecipe = catchAsync(async (req, res, next) => {
     required: value,
   }));
 
-  // console.log(ingredientsRequiredFields);
   const ingredientsFormated = ingredientsNames.map((name, index) => {
     return {
       ...name,
@@ -155,16 +152,6 @@ exports.createRecipe = catchAsync(async (req, res, next) => {
   const instructionsFormated = instructionsInputFields.step.map((step, index) => ({
     step: instructionsInputFields.step[index],
   }));
-
-  // replace timers with tips??
-  // const instructionsTimers = instructionsInputFields.timer.map(
-  //   (timer, index) => ({
-  //     timer: Number(instructionsInputFields.timer[index]),
-  //   })
-  // );
-  // const instructionsFormated = instructionsSteps.map((step, index) => {
-  //   return { ...step, ...instructionsTimers[index] };
-  // });
 
   const recipe = await Recipe.create({
     title: req.body.title,
@@ -179,20 +166,18 @@ exports.createRecipe = catchAsync(async (req, res, next) => {
     mealTypes: req.body.mealTypes,
     dishTypes: req.body.dishTypes,
     allergens: req.body.allergens,
-    image: imageFormated,
+    image: image ? { url: image.path, filename: image.filename } : { url: "", filename: "" },
   });
+
   res.redirect(`/api/recipes/${recipe._id}`);
-  // res.status(201).json({
-  //   status: "success",
-  //   data: {
-  //     data: recipe,
-  //   },
-  // });
 });
 
 exports.updateRecipe = catchAsync(async (req, res, next) => {
   const { id } = req.params;
+  // to get single image use req.file, for multiple images use req.files, but not req.body
+  const imageUpdate = req.file;
 
+  // cousine, mealtype, alergens is not working as prefilled (need to fix)
   // Extract the fields to update from req.body.recipe
   const {
     title,
@@ -205,18 +190,17 @@ exports.updateRecipe = catchAsync(async (req, res, next) => {
     mealTypes,
     dishTypes,
     allergens,
-    image,
   } = req.body;
 
+  // instructions
   const instructionsInputFields = req.body.instructions;
-
   const instructionsFormated = instructionsInputFields.step.map((step, index) => ({
     step: instructionsInputFields.step[index],
   }));
 
+  // ingredients
   const ingredientsInputFields = req.body.ingredients;
-  //console.log(ingredientsInputFields)
-  // count ingredient name to know how many checkboxes expect, then loop
+  // count ingredients name to know how many checkboxes expect, then loop
   const ingredientsValues = ingredientsInputFields.name;
   const ingredientsLength = Object.keys(ingredientsValues).length;
   const ingredientsRequiredFields = [];
@@ -227,28 +211,23 @@ exports.updateRecipe = catchAsync(async (req, res, next) => {
       ingredientsRequiredFields.push(false);
     }
   }
-  //console.log(ingredientsRequiredFields);
+  // ingredients name
   const ingredientsNames = ingredientsInputFields.name.map((step, index) => ({
     name: ingredientsInputFields.name[index],
   }));
-
+  // ingredients quantity
   const ingredientsQuantities = ingredientsInputFields.quantity.map((quantity, index) => ({
     quantity: Number(ingredientsInputFields.quantity[index]),
   }));
+  // ingredients units
   const ingredientsUnits = ingredientsInputFields.unit.map((unit, index) => ({
     unit: ingredientsInputFields.unit[index],
   }));
-  console.log(ingredientsUnits);
-  // // const ingredientsRequiredFields = ingredientsRequired.required.map(
-  // //   (required, index) => ({
-  // //     required: Boolean(ingredientsInputFields.required[index]),
-  // //   })
-  // // );
+  // ingredients required
   const ingredientsRequired = ingredientsRequiredFields.map((value) => ({
     required: value,
   }));
-
-  // //console.log(ingredientsRequiredFields);
+  // ingredients formated
   const ingredientsFormated = ingredientsNames.map((name, index) => {
     return {
       ...name,
@@ -257,7 +236,6 @@ exports.updateRecipe = catchAsync(async (req, res, next) => {
       ...ingredientsRequired[index],
     };
   });
-  // console.log(ingredientsFormated);
 
   // Create an update object with the fields to update
   const update = {
@@ -273,47 +251,45 @@ exports.updateRecipe = catchAsync(async (req, res, next) => {
     mealTypes,
     dishTypes,
     allergens,
-    image,
   };
-  // image should be as req.file and not req.body or req.files. because only 1 pic
-  // cousine, mealtype, alergens is not working as prefilled
 
-  const recipe = await Recipe.findByIdAndUpdate(id, update);
-  await recipe.save();
-  //console.log(recipe);
+  // check this code one more time
+  const recipe = await Recipe.findByIdAndUpdate(id, update, { new: true, runValidators: true });
+
+  if (imageUpdate) {
+    const previousImage = recipe.image;
+    const imageFormated = { url: imageUpdate.path, filename: imageUpdate.filename };
+
+    // Add validators to the image field
+    const validationOptions = {
+      runValidators: true,
+      context: "query",
+    };
+
+    await recipe.updateOne({ image: imageFormated }, validationOptions);
+
+    await cloudinary.uploader.destroy(previousImage.filename); // delete previous image from cloudinary
+  }
+
+  if (!recipe) {
+    return next(new AppError("No recipe found with that ID", 404));
+  }
+
   res.redirect(`/api/recipes/${recipe._id}`);
 });
 
-// const updatedRecipe = await Recipe.findByIdAndUpdate(
-//   req.params.id,
-//   req.body,
-//   {
-//     new: true,
-//     runValidators: true,
-//   }
-// );
-
-// if (!updatedRecipe) {
-//   return next(new AppError("No recipe found with that ID", 404));
-// }
-
-// res.json(200).json({
-//   status: "success",
-//   data: {
-//     data: updatedRecipe,
-//   },
-// });
-
 exports.deleteRecipe = catchAsync(async (req, res, next) => {
-  const deletedRecipe = await Recipe.findByIdAndDelete(req.params.id);
-
-  if (!deletedRecipe) {
+  const { id } = req.params;
+  const recipe = await Recipe.findById(id);
+  const relatedCloudinaryImage = recipe.image;
+  // delete recipe
+  const deletedRecipe = await Recipe.findByIdAndDelete(id);
+  // delete related image from cloudinary
+  if (deletedRecipe) {
+    await cloudinary.uploader.destroy(relatedCloudinaryImage.filename);
+  }
+  if (!deletedRecipe || !recipe) {
     return next(new AppError("No recipe found with that ID", 404));
   }
   res.redirect("/api/recipes");
-
-  // res.status(204).json({
-  //   status: "success",
-  //   data: null,
-  // });
 });

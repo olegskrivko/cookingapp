@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 
 const imageSchema = new mongoose.Schema({
-  url: String,
-  filename: String,
+  url: { type: String, required: [true, "Image URL is required"] },
+  filename: { type: String, required: [true, "Image filename is required"] },
 });
+
 // set thumbnail img size
 imageSchema.virtual("thumbnail").get(function () {
   return this.url.replace("upload", "/upload/w_200");
@@ -148,7 +149,16 @@ const recipeSchema = new mongoose.Schema({
   //     updatedAt: { type: Date, default: Date.now },
   //   },
   // ],
-  image: imageSchema,
+  image: {
+    type: imageSchema,
+    required: [true, "Image is required"],
+    validate: {
+      validator: function (value) {
+        return value && value.url && value.filename;
+      },
+      message: "Image URL and filename are required",
+    },
+  },
   createdAt: {
     type: Date,
     default: Date.now,
