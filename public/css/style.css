@@ -1,123 +1,57 @@
-/* Basic styles */
-
-body {
-  font-family: "Helvetica Neue", sans-serif;
+/* remove arrows from number input field */
+/* Chrome, Safari, Edge, Opera */
+#inputCookingTime::-webkit-outer-spin-button,
+#inputCookingTime::-webkit-inner-spin-button,
+#inputPreparationTime::-webkit-outer-spin-button,
+#inputPreparationTime::-webkit-inner-spin-button,
+#inputServings::-webkit-outer-spin-button,
+#inputServings::-webkit-inner-spin-button,
+#inputInstructionsTime::-webkit-outer-spin-button,
+#inputInstructionsTime::-webkit-inner-spin-button,
+#inputQuantity::-webkit-outer-spin-button,
+#inputQuantity::-webkit-inner-spin-button,
+.custom-pagination-value::-webkit-outer-spin-button,
+.custom-pagination-value::-webkit-inner-spin-button,
+.total-time::-webkit-outer-spin-button,
+.total-time::-webkit-inner-spin-button {
+  -webkit-appearance: none;
   margin: 0;
-  padding: 0;
+}
+/* remove arrows from number input field */
+/* Firefox */
+#inputCookingTime[type="number"],
+#inputPreparationTime[type="number"],
+#inputServings[type="number"],
+#inputInstructionsTime[type="number"],
+#inputQuantity[type="number"],
+.custom-pagination-value[type="number"],
+.total-time[type="number"] {
+  -moz-appearance: textfield;
 }
 
-header {
-  background-color: #f8f8f8;
-  border-bottom: 1px solid #ddd;
-  padding: 10px;
+.custom-pagination {
+  border: none;
+  background-color: inherit !important;
 }
 
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.custom-page-link.disabled {
+  border: none;
+  background-color: initial;
+  outline: none;
 }
 
-nav li {
-  display: inline-block;
-  margin-right: 20px;
+.custom-page-link:hover,
+.custom-page-link:active,
+.custom-page-link:focus {
+  border: none;
+  background-color: initial;
+  outline: none;
 }
 
-nav li:last-child {
-  margin-right: 0;
-}
-
-nav a {
-  color: #333;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 5px;
-}
-
-nav a:hover {
-  color: #666;
-}
-
-main {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-h2 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 0;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  margin-bottom: 10px;
-}
-
-a {
-  color: #333;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #666;
-}
-
-/* Custom styles */
-
-body {
-  background-color: #f5f5f5;
-}
-
-header {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-nav {
-  text-align: center;
-}
-
-nav a {
-  border-radius: 5px;
-  padding: 8px 20px;
-  transition: all 0.3s ease;
-}
-
-nav a:hover {
-  background-color: #eee;
-}
-
-main {
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-}
-
-ul li {
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-}
-
-ul li:last-child {
-  border-bottom: none;
-}
-
-a.btn {
-  display: inline-block;
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  margin-top: 20px;
-}
-
-a.btn:hover {
-  background-color: #666;
+.custom-page-link:hover,
+.custom-page-link:active,
+.custom-page-link:focus {
+  border: none;
+  background-color: initial;
+  outline: none;
 }

@@ -8,7 +8,7 @@
   novalidate
   enctype="multipart/form-data"
 >
-
+  <!-- Title -->
   <div class="col-md-6 mb-3">
     <label for="inputTitle" class="form-label">Title</label>
     <div class="input-group">
@@ -33,7 +33,7 @@
     </div>
     <small class="form-text text-muted">Maximum length 50 characters.</small>
   </div>
-
+  <!-- Difficulty -->
   <div class="col-md-3 mb-3">
     <label for="inputDifficulty" class="form-label">Difficulty</label>
     <div class="input-group">
@@ -53,7 +53,7 @@
     </div>
     <small class="form-text text-muted">Please provide recipe difficulty level.</small>
   </div>
- 
+ <!-- Servings -->
   <div class="col-md-3 mb-3">
     <label for="inputServings" class="form-label">Servings</label>
     <div class="input-group">
@@ -74,7 +74,7 @@
     </div>
     <small class="form-text text-muted">Maximum of 16 servings allowed.</small>
   </div>
-
+<!-- Description -->
   <div class="col-md-12 mb-3">
     <label for="textareaDescription" class="form-label">Description</label>
     <div class="input-group">
@@ -95,11 +95,7 @@
     </div>
     <small class="form-text text-muted">Maximum length 500 characters.</small>
   </div>
-  
-
-  
-
-
+  <!-- Dish Type -->
   <div class="col-md-3 mb-3">
     <label for="inputDishTypes" class="form-label">Dish Type:</label>
     <div class="input-group">
@@ -126,7 +122,7 @@
     >
   </div>
 
-
+<!-- Meal Type -->
   <div class="col-md-3 mb-3">
     <label for="inputMealTypes" class="form-label">Meal Type:</label>
     <div class="input-group">
@@ -154,8 +150,7 @@
       >Use <kbd>ctrl</kbd> key to select up to 3 meal types.</small
     >
   </div>
-
-
+<!-- Cuisine -->
   <div class="col-md-3 mb-3">
     <label for="inputCuisine" class="form-label">Cuisine</label>
     <div class="input-group">
@@ -180,7 +175,7 @@
     </div>
     <small class="form-text text-muted">Use <kbd>ctrl</kbd> key to select up to 3 cuisines.</small>
   </div>
-
+<!-- Contains Allergens -->
   <div class="col-md-3 mb-3">
     <label for="inputAllergens" class="form-label">Contains Allergens</label>
     <div class="input-group">
@@ -198,7 +193,7 @@
       >To select multiple allergens, use the <kbd>ctrl</kbd> key</small
     >
   </div>
-
+<!-- Preparation time -->
   <div class="col-md-3 mb-3">
     <label for="inputPreparationTime" class="form-label">Preparation time</label>
     <div class="input-group">
@@ -219,6 +214,7 @@
     <small class="form-text text-muted">Preparation time cannot exceed 1440 min | 24h</small>
   </div>
 
+<!-- Cooking time -->
   <div class="col-md-3 mb-3">
     <label for="inputCookingTime" class="form-label">Cooking time</label>
     <div class="input-group">
@@ -238,35 +234,7 @@
     </div>
     <small class="form-text text-muted">Cooking time cannot exceed 1440 min | 24h</small>
   </div>
-
-
-
-
-
-
-  <!-- <div class="col-md-12">
-    <label for="inputImage" class="form-label">Replace image</label>
-
-    <div class="input-group mb-3">
-      <span class="input-group-text"><i class="bi bi-image"></i></span>
-    <input type="file" class="form-control" id="inputImage"  name="image" />
-    </div>
-
-    <div class="mb-3">
-      <img src="<=recipe.image.thumbnail %>" class="img-thumbnail" alt="" />
-      <div class="form-check-inline">
-        <input
-        type="hidden"
-          type="text"
-          name="deleteImage"
-          value="<=recipe.image.filename%>"
-          id="image"
-        />
-      </div>
-    </div>
-  </div> -->
-
-
+<!-- Replace Image -->
   <div class="col-md-6 mb-3">
     <label for="inputImage" class="form-label">Replace image</label>
     <div class="input-group">
@@ -286,6 +254,7 @@
     >
   </div>
 
+  <!-- Previous Image -->
   <div class="col-md-12 mb-3 d-flex justify-content-center">
     <div class="">
       <img src="<%=recipe.image.thumbnail %>" class="img-thumbnail" alt="" />
@@ -336,7 +305,6 @@
                     />
                    
                     <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="ingredients[unit][]" style="max-width: 20%">
-            
                       <% unitOptions.forEach(option => { %>
                         <option value="<%= option %>" <% if (option.toString() === ingredient.unit.toString()) { %>selected<% } %>>
                           <%= option %>
@@ -344,15 +312,11 @@
                       <% }); %>
 
                       </select>
-
-                      
-            
                     <button
                     data-action="delete"
                     class="btn btn-danger delete-ingredient-btn"
                     type="button"
                     id="delete-ingredient-btn"
-                  
                   >
                   <i class="bi bi-trash3" style="pointer-events: none;"></i>
                   </button>
@@ -377,7 +341,6 @@
         <% if(recipe.instructions && recipe.instructions.length > 0) {%> <%
             recipe.instructions.forEach((instruction, index) => { %>
 
-                
         <div class="input-group mb-3">
             <span class="input-group-text instruction-nbr">Step 1</span>
       
@@ -389,15 +352,12 @@
             placeholder="Instruction"
             aria-label="Instruction"
             aria-describedby="button-addon2"
-      
           />
-          
             <button
             data-action="delete"
             class="btn btn-danger delete-instruction-btn"
             type="button"
             id="delete-instruction-btn"
-          
           >
           <i class="bi bi-trash3" style="pointer-events: none;"></i>
           </button>
@@ -409,7 +369,6 @@
       </div>
     </div>
 
-    
     <div class="d-grid gap-2 col-md-6 mx-auto">
     <button id="add-instruction-btn" class="btn btn-warning col-md-6 mx-auto" type="button">
       <i class="bi bi-list"></i> Add Instruction
@@ -442,19 +401,7 @@
       />
     </div>
       
-    
-    
-    <!-- <input
-        type="text"
-        class="form-control"
-        name="ingredients[name][]" 
-        placeholder="Ingredient"
-        aria-label="Ingredient"
-        aria-describedby="button-addon2"
-        style="max-width: 60%"
-      /> -->
-
-      <!-- ingredient input field -->
+  <!-- Ingredient Input Field -->
     <input
     list="suggestion-list"
     type="text"
@@ -471,19 +418,7 @@
   />
   <datalist class="suggestion-list" id="suggestion-list"></datalist>
 
-
-      <!-- <input
-          type="text"
-          class="form-control"
-          name="ingredients[quantity][]" 
-          placeholder="Quantity"
-          aria-label="Quantity"
-          aria-describedby="button-addon2"
-          style="max-width: 20%"
-      />
-        -->
-
-  <!-- ingredient quantity field -->
+  <!-- Ingredient Quantity Field -->
   <input
   id="inputQuantity"
   type="number"
@@ -498,18 +433,6 @@
   aria-label="Quantity"
   style="max-width: 20%"
 />
-        <!-- <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="ingredients[unit][]" style="max-width: 20%">
-          <option selected value="g">Gram</option>
-          <option value="kg">Kilogram</option>
-          <option value="ml">Milliliter</option>
-          <option value="l">Liter</option>
-          <option value="tsp">Teaspoon</option>
-          <option value="tbsp">Tablespoon</option>
-          <option value="c">Cup</option>
-          <option value="oz">Ounce</option>
-          <option value="lb">Pound</option>
-          <option value="pcs">Pieces</option>
-          </select> -->
 
           <select
           class="form-select"
@@ -524,17 +447,7 @@
           <% }) %>
         </select>
 
-        <!-- <button
-        data-action="delete"
-        class="btn btn-danger delete-ingredient-btn"
-        type="button"
-        id="delete-ingredient-btn"
-      
-      >
-      <i class="bi bi-trash3" style="pointer-events: none;"></i>
-      </button> -->
-
-      <!-- ingredient delete btn -->
+      <!-- Ingredient Delete BTN -->
     <button data-action="delete" class="btn btn-danger delete-ingredient-btn" type="button">
       <i class="bi bi-trash3" style="pointer-events: none"></i>
     </button>
@@ -554,271 +467,14 @@
       placeholder="Instruction"
       aria-label="Instruction"
     />
-    <!-- additional field with note or tip can be added later-->
     <button data-action="delete" class="btn btn-danger delete-instruction-btn" type="button">
       <i class="bi bi-trash3" style="pointer-events: none"></i>
     </button>
   </div>
-
-  
-  
-<!-- </div> -->
 </template>
 
 <!-- JavaScript code to handle adding fields -->
-<script>
-  
-  const recipeForm = document.querySelector("#recipe-form");
-  const ingredientContainer = document.querySelector(".ingredient-container");
-  const instructionContainer = document.querySelector(".instruction-container");
-
-  const addIngredientBtn = document.querySelector("#add-ingredient-btn");
-  const addInstructionBtn = document.querySelector("#add-instruction-btn");
-
-  const deleteIngredientBtn = document.querySelector(".delete-ingredient-btn");
-  const deleteInstructionBtn = document.querySelector(".delete-instruction-btn");
-
-  const ingredientTemplate = document.querySelector("#ingredient-template");
-  const instructionTemplate = document.querySelector("#instruction-template");
-
-  let ingredientCount = 1;
-  let instructionCount = 1;
-
-  // function to add new ingredient
-  function addIngredientElement() {
-    let ingredient = ingredientTemplate.content.cloneNode(true);
-    ingredient
-      .querySelector(".ingredient-checkbox")
-      .setAttribute("id", `ingredientCheckbox${ingredientCount}`);
-    ingredient
-      .querySelector(".ingredient-checkbox-label")
-      .setAttribute("for", `ingredientCheckbox${ingredientCount}`);
-    ingredient
-      .querySelector(".ingredient-checkbox")
-      .setAttribute("name", `ingredients[required][item${ingredientCount}]`);
-    ingredient
-      .querySelector(".ingredient-input")
-      .setAttribute("id", `ingredient${ingredientCount}`);
-    ingredient
-      .querySelector(".ingredient-input")
-      .setAttribute("list", `suggestion-list${ingredientCount}`);
-    // fix data list
-    ingredient
-      .querySelector(".suggestion-list")
-      .setAttribute("id", `suggestion-list${ingredientCount}`);
-
-    ingredientContainer.appendChild(ingredient);
-  }
-
-  function addInstructionElement() {
-    let instruction = instructionTemplate.content.cloneNode(true);
-
-    instruction
-      .querySelector(".instruction-input")
-      .setAttribute("id", `instruction${instructionCount}`);
-    instruction.querySelector(".instruction-nbr").innerText = `Step ${instructionCount}`;
-    instructionContainer.appendChild(instruction);
-  }
-
-  // Add 1 ingredient input element on page load
-  (function () {
-    fixIngredientAttributes();
-  })();
-
-  // Add 1 instruction element on page load
-  (function () {
-    fixInstructionAttributes();
-  })();
-
-  function fixIngredientAttributes() {
-    // fix remaining ingredient attributes: name, id, and label after user deletes some random ingredient
-    let allCheckboxes = document.querySelectorAll(".ingredient-checkbox");
-    let allIngredientInputs = document.querySelectorAll(".ingredient-input");
-    let allIngredientLabels = document.querySelectorAll(".ingredient-checkbox-label");
-    let allIngredientsDatalists = document.querySelectorAll(".suggestion-list");
-
-    let indexLabels = 1;
-    let indexCheckbox = 1;
-    let indexIngredient = 1;
-    let indexDatalist = 1;
-
-    allCheckboxes.forEach((item) => {
-      item.setAttribute("name", `ingredients[required][item${indexCheckbox}]`);
-      item.setAttribute("id", `ingredientCheckbox${indexCheckbox}`);
-      indexCheckbox++;
-    });
-
-    allIngredientLabels.forEach((item) => {
-      item.setAttribute("for", `ingredientCheckbox${indexLabels}`);
-      indexLabels++;
-    });
-
-    allIngredientInputs.forEach((item) => {
-      item.setAttribute("id", `ingredient${indexIngredient}`);
-      item.setAttribute("list", `suggestion-list${indexIngredient}`);
-      indexIngredient++;
-    });
-
-    allIngredientsDatalists.forEach((item) => {
-      item.setAttribute("id", `suggestion-list${indexDatalist}`);
-      indexDatalist++;
-    });
-  }
-
-  function fixInstructionAttributes() {
-    let allInstructionInputs = document.querySelectorAll(".instruction-input");
-    let instructionNbrs = document.querySelectorAll(".instruction-nbr");
-    let indexInstruction = 1;
-    let indexStepNbr = 1;
-
-    allInstructionInputs.forEach((item) => {
-      item.setAttribute("id", `instruction${indexInstruction}`);
-      indexInstruction++;
-    });
-
-    instructionNbrs.forEach((item) => {
-      item.innerText = `Step ${indexStepNbr}`;
-      indexStepNbr++;
-    });
-  }
-
-  // Add new ingredient element
-  addIngredientBtn.addEventListener("click", () => {
-    addIngredientElement();
-    fixIngredientAttributes();
-  });
-
-  // Add new instruction element
-  addInstructionBtn.addEventListener("click", () => {
-    addInstructionElement();
-    fixInstructionAttributes();
-  });
-
-  // Bind the event to the parent element
-  recipeForm.addEventListener("click", function (event) {
-    // check the delete button was clicked
-    if (event.target.dataset.action === "delete") {
-      // remove parent element (remove input field)
-      const delBtnParent = event.target.parentElement;
-      delBtnParent.remove();
-      // fix attributes after deleting
-      fixIngredientAttributes();
-      fixInstructionAttributes();
-    }
-  });
-
-
-
-// add this logic to backend instead of frontend to hide api
-function automcomplete(inputElement) {
-  const options = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  const apiKey = "dfc2a66c93a14b528b3ccceadd16042d";
-  inputElement.addEventListener("input", async (event) => {
-    let input = event.target;
-    let inputValue = input.value;
-    let suggestionList = input.nextElementSibling;
-    let suggestionNumber = 10;
-
-    if (inputValue.length >= 2) {
-      let response = await fetch(
-        `https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${apiKey}&query=${inputValue}&number=${suggestionNumber}`,
-        options
-      );
-      let data = await response.json();
-      suggestionList.innerHTML = "";
-
-      data.forEach((suggestion) => {
-        let suggestionOption = document.createElement("option");
-        suggestionOption.value = suggestion.name;
-        suggestionList.appendChild(suggestionOption);
-      });
-    } else {
-      suggestionList.innerHTML = "";
-    }
-  });
-}
-
-
-
-</script>
-<!-- <script>
-  // Check if the Web Speech API is supported in the current browser
-if ('speechSynthesis' in window) {
-  // Create a new SpeechSynthesisUtterance instance
-  var speechSynthesisUtterance = new SpeechSynthesisUtterance();
-
-  // Set the text to be spoken
-  speechSynthesisUtterance.text = 'Hello, this is a text-to-speech example in JavaScript.';
-
-  // Optionally, you can set other properties of the speechSynthesisUtterance, such as rate, pitch, voice, etc.
-
-  // Call the speechSynthesis.speak() method to start the speech synthesis
-  window.speechSynthesis.speak(speechSynthesisUtterance);
-} else {
-  console.error('Text-to-speech is not supported in this browser.');
-}
-</script> -->
-
-
-
-
-<style>
-  /* Chrome, Safari, Edge, Opera */
-  #inputCookingTime::-webkit-outer-spin-button,
-  #inputCookingTime::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  /* Firefox */
-  #inputCookingTime[type="number"] {
-    -moz-appearance: textfield;
-  }
-  /* Chrome, Safari, Edge, Opera */
-  #inputPreparationTime::-webkit-outer-spin-button,
-  #inputPreparationTime::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  /* Firefox */
-  #inputPreparationTime[type="number"] {
-    -moz-appearance: textfield;
-  }
-  /* Chrome, Safari, Edge, Opera */
-  #inputServings::-webkit-outer-spin-button,
-  #inputServings::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  /* Firefox */
-  #inputServings[type="number"] {
-    -moz-appearance: textfield;
-  }
-
-  /* Chrome, Safari, Edge, Opera */
-  #inputInstructionsTime::-webkit-outer-spin-button,
-  #inputInstructionsTime::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  /* Firefox */
-  #inputInstructionsTime[type="number"] {
-    -moz-appearance: textfield;
-  }
-  /* Chrome, Safari, Edge, Opera */
-  #inputQuantity::-webkit-outer-spin-button,
-  #inputQuantity::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  /* Firefox */
-  #inputQuantity[type="number"] {
-    -moz-appearance: textfield;
-  }
-</style>
+<script src="/js/recipeEdit.js"></script>
+<script src="/js/autocompleteIngredients.js"></script>
 
 

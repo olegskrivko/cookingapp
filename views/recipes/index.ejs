@@ -150,7 +150,7 @@
 
 
 
-
+<!-- <script src="/js/indexFiltersPaginations.js"></script> -->
 <script>
   let searchFormBtn = document.querySelector(".search-form-btn");
   let resetFormBtn = document.querySelector(".reset-form-btn")
@@ -271,7 +271,6 @@
       let startURL = currentUrl.split('?')[0];
       console.log("startURL", startURL)
 
-
       let urltogo = startURL + `?page=${encodeURI(customPaginationValue)}&limit=${encodeURI(pageSize)}&search=${encodeURI(filterOptions.filterRecipeTitle)}&mealTypes=${encodeURI(filterOptions.filterMealType)}&dishTypes=${encodeURI(filterOptions.filterDishType)}&cuisines=${encodeURI(filterOptions.filterCuisine)}&totalTime=${encodeURI(filterOptions.filterTotalCookingTime)}`
       window.location.href = urltogo
       } else {
@@ -280,76 +279,13 @@
       let startURL = currentUrl.split('?')[0];
       console.log("startURL", startURL)
 
-
       let urltogo = startURL + `?page=${encodeURI(customPaginationValue)}&limit=${encodeURI(pageSize)}`
       window.location.href = urltogo
       }
-      
-      
 
     })
-
-
-
-
- 
 </script>
 
 
 
-<style>
-  .custom-pagination {
-    border: none;
-    background-color: inherit !important;
-  }
- 
-  /* Chrome, Safari, Edge, Opera */
-  .custom-pagination-value::-webkit-outer-spin-button,
-  .custom-pagination-value::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  /* Firefox */
-  .custom-pagination-value[type="number"] {
-    -moz-appearance: textfield;
-  }
-
-</style>
-
-<style>
-  .custom-page-link.disabled {
-    border: none;
-    background-color: initial;
-    outline: none;
-  }
-
-.custom-page-link:hover,
-.custom-page-link:active,
-.custom-page-link:focus {
-  border: none;
-  background-color: initial;
-  outline: none;
-}
-
-.custom-page-link:hover,
-.custom-page-link:active,
-.custom-page-link:focus {
-  border: none;
-  background-color: initial;
-  outline: none;
-}
-
- /* Chrome, Safari, Edge, Opera */
- .total-time::-webkit-outer-spin-button,
- .total-time::-webkit-inner-spin-button {
-   -webkit-appearance: none;
-   margin: 0;
- }
- /* Firefox */
- .total-time[type="number"] {
-   -moz-appearance: textfield;
- }
-
-
-</style>
 
