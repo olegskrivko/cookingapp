@@ -1,6 +1,4 @@
 <% layout('layouts/boilerplate')%>
-
-
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/"><i class="bi bi-house-door-fill"></i></a></li>
@@ -43,11 +41,20 @@
 
         <div class="col-md-12">
           <label class="form-label" for="searchTitle">Recipe Title:</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-fonts"></i>
+            </span>
           <input type="text" class="form-control search-title" id="searchTitle" name="search" value="<%= searchValue || '' %>" />
         </div>
+      </div>
 
         <div class="col-md-12">
           <label class="form-label">Meal Type:</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-cup-hot-fill"></i>
+            </span>
           <select class="form-control" id="mealType" name="mealTypes">
             <% mealTypesOptions.forEach(option => { %>
               <option value="<%= option %>" <%= mealTypeValue === option ? 'selected' : '' %>>
@@ -56,9 +63,14 @@
             <% }) %>
           </select>
         </div>
+      </div>
 
         <div class="col-md-12">
           <label class="form-label">Dish Type:</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-cup-hot-fill"></i>
+            </span>
           <select class="form-control" id="dishType" name="dishTypes">
             <% dishTypesOptions.forEach(option => { %>
               <option value="<%= option %>" <%= dishTypeValue === option ? 'selected' : '' %>>
@@ -67,9 +79,13 @@
             <% }) %>
           </select>
         </div>
+      </div>
+        
 
         <div class="col-md-12">
           <label class="form-label">Cuisine:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-globe-americas"></i></span>
           <select class="form-control" id="cuisines" name="cuisines">
             <% cuisinesOptions.forEach(option => { %>
               <option value="<%= option %>" <%= cuisinesValue === option ? 'selected' : '' %>>
@@ -78,11 +94,16 @@
             <% }) %>
           </select>
         </div>
+        </div>
 
         <div class="col-md-12">
           <label class="form-label" for="totalTime">Total Cooking Time:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-alarm"></i></span>
           <input type="number" class="form-control total-time" id="totalTime" min="0" name="totalTime" value="<%= totalTimeValue || '' %>" />
         </div>
+      </div>
+
 
         <div class="col-md-12 mt-3 d-flex justify-content-around">
           <button class="btn btn-warning search-form-btn" type="submit"><i class="bi bi-search"></i> Search</button>

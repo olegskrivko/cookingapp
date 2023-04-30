@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Joi = require("joi");
 
 const imageSchema = new mongoose.Schema({
   url: { type: String, required: [true, "Image URL is required"] },
@@ -15,12 +16,14 @@ const recipeSchema = new mongoose.Schema({
     type: String,
     required: [true, "Title is required"],
     trim: true,
-    maxlength: [60, "Title can have up to 60 characters"],
+    minlength: [5, "Title must be at least 5 characters"],
+    maxlength: [50, "Title can have up to 50 characters"],
   },
   description: {
     type: String,
     required: [true, "Description is required"],
     trim: true,
+    minlength: [5, "Description must be at least 5 characters"],
     maxlength: [500, "Description can have up to 500 characters"],
   },
   ingredients: [
@@ -37,11 +40,10 @@ const recipeSchema = new mongoose.Schema({
         required: [true, "Ingredient quantity is required"],
         min: [0, "Ingredient quantity must be a positive number"],
         max: [1000, "Ingredient quantity cannot exceed 1000"],
-        default: 0,
+        // default: 0,
       },
       unit: {
         type: String,
-        enum: ["g", "kg", "ml", "l", "tsp", "tbsp", "cup", "pcs"],
         required: [true, "Ingredient quantity unit is required"],
       },
       required: {
@@ -70,7 +72,7 @@ const recipeSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Cooking time is required"],
     min: [0, "Cooking time must be a positive number"],
-    max: [1440, "Preparation time cannot exceed 24h"],
+    max: [1440, "Cooking time cannot exceed 24h"],
     default: 0,
   },
   totalTime: {
@@ -176,6 +178,49 @@ recipeSchema.pre("save", function (next) {
   next();
 });
 
+// JOI VALIDATED SCHEMA
+function validateRecipe(recipe) {
+  const schema = Joi.object({
+    title: Joi.string().min(5).max(50).required(),
+    description: Joi.string().min(5).max(500).required(),
+    ingredients: Joi.array()
+      .items(
+        Joi.object({
+          name: Joi.string().required(),
+          quantity: Joi.number().min(0).required(),
+          unit: Joi.string().required(),
+          required: Joi.boolean().required(),
+        })
+      )
+      .min(1)
+      .required(),
+    instructions: Joi.array()
+      .items(
+        Joi.object({
+          step: Joi.string().required(),
+        })
+      )
+      .min(1)
+      .required(),
+    prepTime: Joi.number().required(),
+    servings: Joi.number().required(),
+    cookTime: Joi.number().required(),
+    difficulty: Joi.string().valid("Easy", "Medium", "Hard", "Expert").required(),
+    cuisines: Joi.array().items(Joi.string()).min(1).required(),
+    mealTypes: Joi.array().items(Joi.string()).min(1).required(),
+    dishTypes: Joi.array().items(Joi.string()).min(1).required(),
+    allergens: Joi.array().items(Joi.string()),
+  });
+  return schema.validate(recipe);
+}
+
 const Recipe = mongoose.model("Recipe", recipeSchema);
 
-module.exports = Recipe;
+module.exports = {
+  Recipe,
+  validateRecipe,
+};
+
+//Joi validation can be used to ensure that data is valid before it is sent to the server,
+//while Mongoose validation can be used to ensure that the data is valid before it is saved to the database.
+//This can provide an extra layer of security and ensure that data is always in the correct format and meets certain requirements.

@@ -1,208 +1,250 @@
 <% layout('layouts/boilerplate')%>
-
-
 <h1 class="text-center">Edit Recipe</h1>
 <form
-  id="create-recipe-form"
+  id="recipe-form"
   class="row g-3"
   action="/api/recipes/<%=recipe._id %>?_method=PUT"
   method="POST"
   novalidate
   enctype="multipart/form-data"
 >
-  <div class="col-md-3">
+
+  <div class="col-md-6 mb-3">
     <label for="inputTitle" class="form-label">Title</label>
-    <div class="input-group mb-3">
-    
-    <span class="input-group-text" id="basic-addon1"
-    ><i class="bi bi-fonts"></i></span>
-    <input type="text" class="form-control" value="<%=recipe.title%>" id="inputTitle" name="title" />
-  </div>
-  </div>
-  <div class="col-md-3">
-    <label for="inputDifficulty" class="form-label">Difficulty</label>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1"
-        ><i class="bi bi-bar-chart-fill"></i
-      ></span>
-      <select id="inputDifficulty" class="form-select" name="difficulty">
-        
-        <% difficultyOptions.forEach(option => { %>
-          <option value="<%= option %>" <% if (option.toString().toLowerCase() === recipe.difficulty.toString().toLowerCase()) { %>selected<% } %>>
-            <%= option %>
-          </option>
-        <% }); %>
-      </select>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-fonts"></i>
+      </span>
+      <input
+        name="title"
+        type="text"
+        value="<%=recipe.title%>"
+        class="form-control"
+        id="inputTitle"
+        minlength="5"
+        maxlength="50"
+        aria-label="Recipe Title up to 50 characters"
+        required
+        autocomplete="off"
+        aria-required="true"
+        autocapitalize="words"
+        autofocus
+      />
     </div>
+    <small class="form-text text-muted">Maximum length 50 characters.</small>
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <label for="inputDifficulty" class="form-label">Difficulty</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-bar-chart-fill"></i>
+      </span>
+      <select id="inputDifficulty" class="form-select" name="difficulty" required
+      aria-required="true"
+      aria-label="Select Difficulty">
+      
+      <% difficultyOptions.forEach(option => { %>
+        <option value="<%= option %>" <% if (option === recipe.difficulty) { %>selected<% } %>>
+          <%= option %>
+        </option>
+      <% }); %>
+    </select>
+    </div>
+    <small class="form-text text-muted">Please provide recipe difficulty level.</small>
   </div>
  
-
-
-  <div class="col-md-3">
-    <label for="inputCuisine" class="form-label">Cuisine</label>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1"
-        ><i class="bi bi-globe-americas"></i
-      ></span>
-      <select id="inputCuisine" class="form-select" name="cuisines">
-       
-        <% cuisinesOptions.forEach(option => { %>
-          <option value="<%= option %>" <% if (option.toString().toLowerCase() === recipe.cuisines.toString().toLowerCase()) { %>selected<% } %>>
-            <%= option %>
-          </option>
-        <% }); %>
-
-
-
-      </select>
-    </div>
-  </div>
-
-  <div class="col-md-3">
+  <div class="col-md-3 mb-3">
     <label for="inputServings" class="form-label">Servings</label>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1"
-        ><i class="bi bi-people-fill"></i
-      ></span>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-people-fill"></i>
+      </span>
       <input
         id="inputServings"
         type="number"
+        value="<%=recipe.servings%>"
         class="form-control"
         name="servings"
-        placeholder="1 - 12"
-        value="<%=recipe.servings%>"
+        min="1"
+        max="16"
+        required
+        aria-required="true"
       />
     </div>
+    <small class="form-text text-muted">Maximum of 16 servings allowed.</small>
   </div>
 
-  <div class="col-md-9">
+  <div class="col-md-12 mb-3">
     <label for="textareaDescription" class="form-label">Description</label>
-    <div class="input-group mb-3">
-    <span class="input-group-text" id="basic-addon1"
-    ><i class="bi bi-body-text"></i></span>
-    <textarea
-      class="form-control"
-      id="textareaDescription"
-      style="height: 100px; resize: none"
-      name="description"
-    ><%=recipe.description%></textarea>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-body-text"></i></span>
+      <textarea
+        class="form-control"
+        id="textareaDescription"
+        style="resize: none"
+        name="description"
+        minlength="5"
+        maxlength="500"
+        autocomplete="off"
+        rows="4"
+        required
+        aria-required="true"
+        autocapitalize="sentences"
+      ><%=recipe.description%></textarea>
     </div>
+    <small class="form-text text-muted">Maximum length 500 characters.</small>
   </div>
+  
 
-  <div class="col-md-3">
-    <label for="inputAllergens" class="form-label">Contains Allergens</label>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1"
-        ><i class="bi bi-exclamation-triangle-fill"></i></span>
+  
+
+
+  <div class="col-md-3 mb-3">
+    <label for="inputDishTypes" class="form-label">Dish Type:</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-cup-hot-fill"></i></span>
       <select
-        id="inputAllergens"
+        id="inputDishTypes"
         class="form-select"
-        name="allergens"
+        name="dishTypes[]"
         multiple
+        size="4"
+        required
+        aria-required="true"
+        aria-label="Select Dish Types"
       >
-
-      <% allergensOptions.forEach(allergen => { %>
-        <option value="<%= allergen %>" <%= recipe.allergens.includes(allergen.toLowerCase()) ? 'selected' : '' %>>
-          <%= allergen %>
+      <% dishTypesOptions.forEach(option => { %>
+        <option  value="<%= option %>" <% if ( recipe.dishTypes.includes(option)) { %>selected<% } %>>
+          <%= option %>
         </option>
-      <% }) %>
-
+      <% }); %>
       </select>
     </div>
+    <small class="form-text text-muted"
+      >Use <kbd>ctrl</kbd> key to select up to 3 dish types.</small
+    >
   </div>
 
 
-
-  <div class="col-md-3">
-    <label for="inputPreparationTime" class="form-label"
-      >Preparation time</label
+  <div class="col-md-3 mb-3">
+    <label for="inputMealTypes" class="form-label">Meal Type:</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-cup-hot-fill"></i>
+      </span>
+      <select
+        name="mealTypes[]"
+        id="inputMealTypes"
+        class="form-select"
+        multiple
+        size="4"
+        required
+        aria-required="true"
+        aria-label="Select Meal Types"
+      >
+        <% mealTypesOptions.forEach(option => { %>
+          <option  value="<%= option %>" <% if ( recipe.mealTypes.includes(option)) { %>selected<% } %>>
+            <%= option %>
+          </option>
+        <% }); %>
+      </select>
+    </div>
+    <small class="form-text text-muted"
+      >Use <kbd>ctrl</kbd> key to select up to 3 meal types.</small
     >
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1"
-        ><i class="bi bi-alarm"></i
-      ></span>
+  </div>
+
+
+  <div class="col-md-3 mb-3">
+    <label for="inputCuisine" class="form-label">Cuisine</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-globe-americas"></i></span>
+      <select
+        id="inputCuisine"
+        class="form-select"
+        name="cuisines[]"
+        multiple
+        required
+        size="4"
+        aria-required="true"
+        aria-label="Select Cuisines"
+      >
+
+        <% cuisinesOptions.forEach(option => { %>
+          <option  value="<%= option %>" <% if ( recipe.cuisines.includes(option)) { %>selected<% } %>>
+            <%= option %>
+          </option>
+        <% }); %>
+      </select>
+    </div>
+    <small class="form-text text-muted">Use <kbd>ctrl</kbd> key to select up to 3 cuisines.</small>
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <label for="inputAllergens" class="form-label">Contains Allergens</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-exclamation-triangle-fill"></i></span>
+      <select id="inputAllergens" class="form-select" name="allergens[]" multiple>
+
+        <% allergensOptions.forEach(option => { %>
+          <option  value="<%= option %>" <% if ( recipe.allergens.includes(option)) { %>selected<% } %>>
+            <%= option %>
+          </option>
+        <% }); %>
+      </select>
+    </div>
+    <small class="form-text text-muted"
+      >To select multiple allergens, use the <kbd>ctrl</kbd> key</small
+    >
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <label for="inputPreparationTime" class="form-label">Preparation time</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-alarm"></i></span>
       <input
         id="inputPreparationTime"
         type="number"
         class="form-control"
         name="prepTime"
+        min="0"
+        max="1440"
+        required
+        aria-required="true"
         value="<%=recipe.prepTime%>"
       />
       <span class="input-group-text">min</span>
     </div>
+    <small class="form-text text-muted">Preparation time cannot exceed 1440 min | 24h</small>
   </div>
-  <div class="col-md-3">
+
+  <div class="col-md-3 mb-3">
     <label for="inputCookingTime" class="form-label">Cooking time</label>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1"
-        ><i class="bi bi-alarm"></i
-      ></span>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-alarm"></i></span>
       <input
         id="inputCookingTime"
         type="number"
         class="form-control"
         name="cookTime"
+        min="0"
+        max="1440"
         value="<%=recipe.cookTime%>"
+        required
+        aria-required="true"
       />
       <span class="input-group-text">min</span>
     </div>
-  </div>
-
-  <div class="col-md-3">
-    <label for="inputMeal" class="form-label">Meal Type:</label>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1"
-        ><i class="bi bi-cup-hot-fill"></i
-      ></span>
-      <!-- <select
-        id="inputMeal"
-        class="form-select"
-        name="mealTypes"
-        multiple
-        size="3"
-      > -->
-      <select
-      id="inputMeal"
-      class="form-select"
-      name="mealTypes"
-    >
-    <% mealTypesOptions.forEach(option => { %>
-      <option  value="<%= option %>" <% if (option.toString().toLowerCase() === recipe.mealTypes.toString().toLowerCase()) { %>selected<% } %>>
-        <%= option.slice(0,-(option.length - 1)).toUpperCase() + option.slice(1,(option.length))  %>
-      </option>
-    <% }); %>
-
-      </select>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <label for="inputDish" class="form-label">Dish Type:</label>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1"
-        ><i class="bi bi-cup-hot-fill"></i
-      ></span>
-  
-      <select
-      id="inputDish"
-      class="form-select"
-      name="dishTypes"
-    >
-   
-    <% dishTypesOptions.forEach(option => { %>
-      <option  value="<%= option %>" <% if (option.toString().toLowerCase() === recipe.dishTypes.toString().toLowerCase()) { %>selected<% } %>>
-        <%= option.slice(0,-(option.length - 1)).toUpperCase() + option.slice(1,(option.length))  %>
-      </option>
-    <% }); %>
-   
-    
-      </select>
-    </div>
+    <small class="form-text text-muted">Cooking time cannot exceed 1440 min | 24h</small>
   </div>
 
 
 
 
-  <div class="col-md-12">
+
+
+  <!-- <div class="col-md-12">
     <label for="inputImage" class="form-label">Replace image</label>
 
     <div class="input-group mb-3">
@@ -211,6 +253,41 @@
     </div>
 
     <div class="mb-3">
+      <img src="<=recipe.image.thumbnail %>" class="img-thumbnail" alt="" />
+      <div class="form-check-inline">
+        <input
+        type="hidden"
+          type="text"
+          name="deleteImage"
+          value="<=recipe.image.filename%>"
+          id="image"
+        />
+      </div>
+    </div>
+  </div> -->
+
+
+  <div class="col-md-6 mb-3">
+    <label for="inputImage" class="form-label">Replace image</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-image"></i></span>
+      <input
+        type="file"
+        class="form-control"
+        id="inputImage"
+        name="image"
+        required
+        aria-required="true"
+        accept="image/png, image/jpeg, image/jpg"
+      />
+    </div>
+    <small class="form-text text-muted"
+      >Please upload a high-quality image in one of the following formats: JPG, PNG, or JPEG.</small
+    >
+  </div>
+
+  <div class="col-md-12 mb-3 d-flex justify-content-center">
+    <div class="">
       <img src="<%=recipe.image.thumbnail %>" class="img-thumbnail" alt="" />
       <div class="form-check-inline">
         <input
@@ -224,16 +301,15 @@
     </div>
   </div>
 
+
   
   <div class="col-md-12 ingredient-box" id="ingredientContainerLabel">
-    <label for="ingredient-container" class="form-label">Please enter a list of all ingredients required for this recipe, along with their respective quantities. If there are any optional ingredients, please indicate this by unchecking the corresponding checkbox.</label>
+    <label for="ingredient-container" class="form-label small text-muted">Please enter a list of all ingredients required for this recipe, along with their respective quantities. If there are any optional ingredients, please indicate this by unchecking the corresponding checkbox.</label>
     <div class="ingredient-container">
-
         <% if(recipe.ingredients && recipe.ingredients.length > 0) {%> <% for (let
             ingredient of recipe.ingredients) { %>
 
-                <div class="input-group mb-3">
-        
+            <div class="input-group mb-3">
                     <div class="input-group-text">
                       <span>Required&nbsp;</span><input class="form-check-input ingredients-checkbox mt-0" name="ingredients[required]" type="checkbox"  <% if(ingredient.required) { %> checked <% } %> value=""   aria-label="Checkbox for following text input"> 
                     </div>
@@ -267,18 +343,6 @@
                         </option>
                       <% }); %>
 
-
-
-                      <!-- <option value="g">Gram</option>
-                      <option value="kg">Kilogram</option>
-                      <option value="ml">Milliliter</option>
-                      <option value="l">Liter</option>
-                      <option value="tsp">Teaspoon</option>
-                      <option value="tbsp">Tablespoon</option>
-                      <option value="c">Cup</option>
-                      <option value="oz">Ounce</option>
-                      <option value="lb">Pound</option>
-                      <option value="pcs">Pieces</option> -->
                       </select>
 
                       
@@ -293,14 +357,10 @@
                   <i class="bi bi-trash3" style="pointer-events: none;"></i>
                   </button>
                   </div>
-                <!-- </div> -->
 
-                <% } %> <% } else { %>
-                    <p>Ingredients are not available</p>
-                    <% } %>
-
-
-
+            <% } %> <% } else { %>
+                <p>Ingredients are not available</p>
+              <% } %>
 
     </div>
     <div class="d-grid gap-2 col-md-6 mx-auto">
@@ -309,9 +369,10 @@
       </button>
     </div>
   </div>
+
   
   <div class="col-md-12 instruction-box" id="instructionContainerLabel">
-    <label for="instruction-container" class="form-label">Please provide a detailed list of instructions for preparing this recipe, including the required time for each step. If necessary, you may include additional notes or tips to help ensure success.</label>
+    <label for="instruction-container" class="form-label small text-muted">Please provide a detailed list of instructions for preparing this recipe, including the required time for each step. If necessary, you may include additional notes or tips to help ensure success.</label>
     <div class="instruction-container">
         <% if(recipe.instructions && recipe.instructions.length > 0) {%> <%
             recipe.instructions.forEach((instruction, index) => { %>
@@ -344,10 +405,11 @@
           <% }) %> <% } else {%>
             <p>Instructions are not available</p>
             <% } %>
-        <!-- </div> -->
         
       </div>
     </div>
+
+    
     <div class="d-grid gap-2 col-md-6 mx-auto">
     <button id="add-instruction-btn" class="btn btn-warning col-md-6 mx-auto" type="button">
       <i class="bi bi-list"></i> Add Instruction
@@ -362,22 +424,27 @@
     Go Back
   </button>
   
-  <button type="submit" form="create-recipe-form" class="btn btn-primary col-2 float-end">
+  <button type="submit" form="recipe-form" class="btn btn-primary col-2 float-end">
     Update
   </button>
 </div>
 
 <!-- HTML code for the template -->
-<template id="input-ingredient-template">
-
-    <!-- <div class="col-md-6"> -->
-      <div class="input-group mb-3">
-        
-        <div class="input-group-text">
-          <span>Required&nbsp;</span><input class="form-check-input ingredients-checkbox mt-0" name="ingredients[required]" type="checkbox" value="true" aria-label="Checkbox for following text input"> 
-        </div>
+<template id="ingredient-template">
+  <div class="input-group mb-3">
+    <div class="input-group-text">
+      <span><label class="ingredient-checkbox-label">Required</label>&nbsp;</span>
+      <input
+        class="form-check-input ingredient-checkbox"
+        name="ingredients[required]"
+        type="checkbox"
+        value="true"
+      />
+    </div>
       
-        <input
+    
+    
+    <!-- <input
         type="text"
         class="form-control"
         name="ingredients[name][]" 
@@ -385,8 +452,27 @@
         aria-label="Ingredient"
         aria-describedby="button-addon2"
         style="max-width: 60%"
-      />
-        <input
+      /> -->
+
+      <!-- ingredient input field -->
+    <input
+    list="suggestion-list"
+    type="text"
+    oninput="automcomplete(this)"
+    class="form-control ingredient-input"
+    name="ingredients[name][]"
+    placeholder="Search ingredient (up to 50 characters)"
+    autocomplete="off"
+    required
+    maxlength="50"
+    aria-required="true"
+    aria-label="Ingredient"
+    style="max-width: 60%"
+  />
+  <datalist class="suggestion-list" id="suggestion-list"></datalist>
+
+
+      <!-- <input
           type="text"
           class="form-control"
           name="ingredients[quantity][]" 
@@ -394,9 +480,25 @@
           aria-label="Quantity"
           aria-describedby="button-addon2"
           style="max-width: 20%"
-        />
-       
-        <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="ingredients[unit][]" style="max-width: 20%">
+      />
+        -->
+
+  <!-- ingredient quantity field -->
+  <input
+  id="inputQuantity"
+  type="number"
+  class="form-control"
+  name="ingredients[quantity][]"
+  min="0"
+  max="1000"
+  autocomplete="off"
+  placeholder="Quantity"
+  required
+  aria-required="true"
+  aria-label="Quantity"
+  style="max-width: 20%"
+/>
+        <!-- <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="ingredients[unit][]" style="max-width: 20%">
           <option selected value="g">Gram</option>
           <option value="kg">Kilogram</option>
           <option value="ml">Milliliter</option>
@@ -407,9 +509,22 @@
           <option value="oz">Ounce</option>
           <option value="lb">Pound</option>
           <option value="pcs">Pieces</option>
-          </select>
+          </select> -->
 
-        <button
+          <select
+          class="form-select"
+          aria-label="Select unit"
+          required
+          aria-required="true"
+          name="ingredients[unit][]"
+          style="max-width: 20%"
+        >
+          <% unitOptions.forEach(option => { %>
+          <option value="<%= option %>"><%= option %></option>
+          <% }) %>
+        </select>
+
+        <!-- <button
         data-action="delete"
         class="btn btn-danger delete-ingredient-btn"
         type="button"
@@ -417,192 +532,216 @@
       
       >
       <i class="bi bi-trash3" style="pointer-events: none;"></i>
-      </button>
-      </div>
-    <!-- </div> -->
-    
-  <!-- </div> -->
+      </button> -->
+
+      <!-- ingredient delete btn -->
+    <button data-action="delete" class="btn btn-danger delete-ingredient-btn" type="button">
+      <i class="bi bi-trash3" style="pointer-events: none"></i>
+    </button>
+  </div>
 </template>
 
 <!-- HTML code for the template -->
-<template id="input-instruction-template">
+<template id="instruction-template">
 
-  <!-- <div class="col-md-6"> -->
-    <div class="input-group mb-3">
-      <!-- <div class="input-group-text">
-        <input class="form-check-input mt-0" type="checkbox" value="" checked aria-label="Checkbox for following text input">
-      </div> -->
-      <span class="input-group-text instruction-nbr">Step 1</span>
-
-      <input
+  <div class="input-group mb-3">
+    <span class="input-group-text instruction-nbr">Step 1</span>
+    <input
       type="text"
-      class="form-control"
-      name="instructions[step][]" 
+      class="form-control instruction-input"
+      autocomplete="off"
+      name="instructions[step][]"
       placeholder="Instruction"
       aria-label="Instruction"
-      aria-describedby="button-addon2"
-
     />
-    
-      <!-- <input
-        type="number"
-        class="form-control"
-        name="instructions[timer][]" 
-        placeholder="Time"
-        aria-label="Time"
-        min="0"
-        id="inputInstructionsTime"
-        aria-describedby="button-addon2"
-        style="max-width: 15%"
-      /> -->
-<!--    
-      <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon" style="max-width: 25%">
-        <option selected value="g">Gram</option>
-        <option value="kg">Kilogram</option>
-        <option value="ml">Milliliter</option>
-        <option value="l">Liter</option>
-        <option value="tsp">Teaspoon</option>
-        <option value="tbsp">Tablespoon</option>
-        <option value="c">Cup</option>
-        <option value="oz">Ounce</option>
-        <option value="lb">Pound</option>
-        <option value="pcs">Pieces</option>
-        </select> -->
-        <!-- <span class="input-group-text">min</span> -->
-      <button
-      data-action="delete"
-      class="btn btn-danger delete-instruction-btn"
-      type="button"
-      id="delete-instruction-btn"
-    
-    >
-    <i class="bi bi-trash3" style="pointer-events: none;"></i>
+    <!-- additional field with note or tip can be added later-->
+    <button data-action="delete" class="btn btn-danger delete-instruction-btn" type="button">
+      <i class="bi bi-trash3" style="pointer-events: none"></i>
     </button>
-    </div>
-  <!-- </div> -->
+  </div>
+
   
-</div>
+  
+<!-- </div> -->
 </template>
 
 <!-- JavaScript code to handle adding fields -->
 <script>
-  const form = document.getElementById("create-recipe-form");
-
+  
+  const recipeForm = document.querySelector("#recipe-form");
   const ingredientContainer = document.querySelector(".ingredient-container");
-  const addIngredientBtn = document.getElementById("add-ingredient-btn");
+  const instructionContainer = document.querySelector(".instruction-container");
+
+  const addIngredientBtn = document.querySelector("#add-ingredient-btn");
+  const addInstructionBtn = document.querySelector("#add-instruction-btn");
+
   const deleteIngredientBtn = document.querySelector(".delete-ingredient-btn");
-  const templateIngredient = document.getElementById("input-ingredient-template");
+  const deleteInstructionBtn = document.querySelector(".delete-instruction-btn");
+
+  const ingredientTemplate = document.querySelector("#ingredient-template");
+  const instructionTemplate = document.querySelector("#instruction-template");
+
   let ingredientCount = 1;
+  let instructionCount = 1;
 
-  //(function() {
-  //  addIngredientElement()
-  //})();
-
- const fixRequiredAttribute = (function () {
-  let allIngr = document.querySelectorAll('.ingredients-checkbox');
-  allIngr.forEach((item,index) => {
-    item.setAttribute("name", `ingredients[required][item${index + 1}]`)
-    item.setAttribute("id", `ingredient${index + 1}`)
-    ingredientCount = index + 2
-    //console.log(ingredientCount)
-    // fix that on delete id is changing as well
-  })
-
-})()
-console.log(ingredientCount)
-
+  // function to add new ingredient
   function addIngredientElement() {
-    let ingredient = templateIngredient.content.cloneNode(true);
-    ingredient.querySelector("input").setAttribute("id", `ingredient${ingredientCount}`);
-    ingredient.querySelector("input").setAttribute("name", `ingredients[required][item${ingredientCount}]`);
+    let ingredient = ingredientTemplate.content.cloneNode(true);
+    ingredient
+      .querySelector(".ingredient-checkbox")
+      .setAttribute("id", `ingredientCheckbox${ingredientCount}`);
+    ingredient
+      .querySelector(".ingredient-checkbox-label")
+      .setAttribute("for", `ingredientCheckbox${ingredientCount}`);
+    ingredient
+      .querySelector(".ingredient-checkbox")
+      .setAttribute("name", `ingredients[required][item${ingredientCount}]`);
+    ingredient
+      .querySelector(".ingredient-input")
+      .setAttribute("id", `ingredient${ingredientCount}`);
+    ingredient
+      .querySelector(".ingredient-input")
+      .setAttribute("list", `suggestion-list${ingredientCount}`);
+    // fix data list
+    ingredient
+      .querySelector(".suggestion-list")
+      .setAttribute("id", `suggestion-list${ingredientCount}`);
+
     ingredientContainer.appendChild(ingredient);
-    //fixRequiredAttribute()
-    ingredientCount++;
-     
   }
 
+  function addInstructionElement() {
+    let instruction = instructionTemplate.content.cloneNode(true);
 
+    instruction
+      .querySelector(".instruction-input")
+      .setAttribute("id", `instruction${instructionCount}`);
+    instruction.querySelector(".instruction-nbr").innerText = `Step ${instructionCount}`;
+    instructionContainer.appendChild(instruction);
+  }
+
+  // Add 1 ingredient input element on page load
+  (function () {
+    fixIngredientAttributes();
+  })();
+
+  // Add 1 instruction element on page load
+  (function () {
+    fixInstructionAttributes();
+  })();
+
+  function fixIngredientAttributes() {
+    // fix remaining ingredient attributes: name, id, and label after user deletes some random ingredient
+    let allCheckboxes = document.querySelectorAll(".ingredient-checkbox");
+    let allIngredientInputs = document.querySelectorAll(".ingredient-input");
+    let allIngredientLabels = document.querySelectorAll(".ingredient-checkbox-label");
+    let allIngredientsDatalists = document.querySelectorAll(".suggestion-list");
+
+    let indexLabels = 1;
+    let indexCheckbox = 1;
+    let indexIngredient = 1;
+    let indexDatalist = 1;
+
+    allCheckboxes.forEach((item) => {
+      item.setAttribute("name", `ingredients[required][item${indexCheckbox}]`);
+      item.setAttribute("id", `ingredientCheckbox${indexCheckbox}`);
+      indexCheckbox++;
+    });
+
+    allIngredientLabels.forEach((item) => {
+      item.setAttribute("for", `ingredientCheckbox${indexLabels}`);
+      indexLabels++;
+    });
+
+    allIngredientInputs.forEach((item) => {
+      item.setAttribute("id", `ingredient${indexIngredient}`);
+      item.setAttribute("list", `suggestion-list${indexIngredient}`);
+      indexIngredient++;
+    });
+
+    allIngredientsDatalists.forEach((item) => {
+      item.setAttribute("id", `suggestion-list${indexDatalist}`);
+      indexDatalist++;
+    });
+  }
+
+  function fixInstructionAttributes() {
+    let allInstructionInputs = document.querySelectorAll(".instruction-input");
+    let instructionNbrs = document.querySelectorAll(".instruction-nbr");
+    let indexInstruction = 1;
+    let indexStepNbr = 1;
+
+    allInstructionInputs.forEach((item) => {
+      item.setAttribute("id", `instruction${indexInstruction}`);
+      indexInstruction++;
+    });
+
+    instructionNbrs.forEach((item) => {
+      item.innerText = `Step ${indexStepNbr}`;
+      indexStepNbr++;
+    });
+  }
+
+  // Add new ingredient element
   addIngredientBtn.addEventListener("click", () => {
     addIngredientElement();
-
+    fixIngredientAttributes();
   });
- //Bind the event to the parent table say it has an id of parentTable
 
-form.addEventListener("click", function(event){
- 
-   //check the delete button was clicked
-     if(event.target.dataset.action === "delete") {
+  // Add new instruction element
+  addInstructionBtn.addEventListener("click", () => {
+    addInstructionElement();
+    fixInstructionAttributes();
+  });
+
+  // Bind the event to the parent element
+  recipeForm.addEventListener("click", function (event) {
+    // check the delete button was clicked
+    if (event.target.dataset.action === "delete") {
+      // remove parent element (remove input field)
       const delBtnParent = event.target.parentElement;
-      delBtnParent.remove()
-      addCheckboxName()
-   }
-});
+      delBtnParent.remove();
+      // fix attributes after deleting
+      fixIngredientAttributes();
+      fixInstructionAttributes();
+    }
+  });
 
 
 
-const instructionContainer = document.querySelector(".instruction-container");
-const addInstructionBtn = document.getElementById("add-instruction-btn");
-const deleteInstructionBtn = document.querySelector(".delete-instruction-btn");
-const templateInstruction = document.getElementById("input-instruction-template");
-let instructionCount = 1;
+// add this logic to backend instead of frontend to hide api
+function automcomplete(inputElement) {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const apiKey = "dfc2a66c93a14b528b3ccceadd16042d";
+  inputElement.addEventListener("input", async (event) => {
+    let input = event.target;
+    let inputValue = input.value;
+    let suggestionList = input.nextElementSibling;
+    let suggestionNumber = 10;
 
+    if (inputValue.length >= 2) {
+      let response = await fetch(
+        `https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${apiKey}&query=${inputValue}&number=${suggestionNumber}`,
+        options
+      );
+      let data = await response.json();
+      suggestionList.innerHTML = "";
 
-//(function() {
-//  addInstructionElement()
-//})();
-
-(function() {
-    addStepNbr()
-})();
-
-
-// only for instruction
-function addStepNbr(){
-  let allStepNbr = document.querySelectorAll('.instruction-nbr')
-  let innerCounter = 1
-  allStepNbr.forEach(item => {
-    item.innerHTML = `Step ${innerCounter ++}`
-
-  })
+      data.forEach((suggestion) => {
+        let suggestionOption = document.createElement("option");
+        suggestionOption.value = suggestion.name;
+        suggestionList.appendChild(suggestionOption);
+      });
+    } else {
+      suggestionList.innerHTML = "";
+    }
+  });
 }
-
-function addCheckboxName(){
-  // fix checkbox name when user deletes ingredient
-  let allCheckboxes = document.querySelectorAll('.ingredients-checkbox')
-  let innerCounter = 1
-  allCheckboxes.forEach(item => {
-    item.setAttribute("name", `ingredients[required][item${innerCounter}]`)
-    innerCounter ++
-  })
-
-}
-
-function addInstructionElement() {
-  let instruction = templateInstruction.content.cloneNode(true);
-  instruction.querySelector("input").setAttribute("id", `instruction${instructionCount}`);
-  instructionContainer.appendChild(instruction);
-  addStepNbr()
-  instructionCount++;
-}
-
-addInstructionBtn.addEventListener("click", () => {
-  addInstructionElement();
-});
-
-
- //Bind the event to the parent table say it has an id of parentTable
-
-form.addEventListener("click", function(event){
- 
-  //console.log(event.target.dataset.action === "delete")
-   //check the delete button was clicked
-     if(event.target.dataset.action === "delete") {
-      const delBtnParent = event.target.parentElement;
-      delBtnParent.remove()
-      addStepNbr()
-      addCheckboxName()
-   }
-});
 
 
 
@@ -670,7 +809,16 @@ if ('speechSynthesis' in window) {
   #inputInstructionsTime[type="number"] {
     -moz-appearance: textfield;
   }
-
+  /* Chrome, Safari, Edge, Opera */
+  #inputQuantity::-webkit-outer-spin-button,
+  #inputQuantity::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  #inputQuantity[type="number"] {
+    -moz-appearance: textfield;
+  }
 </style>
 
 

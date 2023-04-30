@@ -1,4 +1,4 @@
-const Recipe = require("../model/recipeModel");
+const { Recipe, validateRecipe } = require("../model/recipeModel");
 const { cloudinary } = require("../config/cloudinary");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
@@ -69,15 +69,12 @@ exports.getAllRecipes = catchAsync(async (req, res, next) => {
 
 exports.getRecipeById = catchAsync(async (req, res, next) => {
   const recipe = await Recipe.findById(req.params.id);
+  if (!recipe) {
+    return next(new AppError("No recipe found with that ID", 404));
+  }
   res.status(200).render("recipes/show", {
     recipe,
   });
-  // res.status(200).json({
-  //   status: "success",
-  //   data: {
-  //     data: recipe,
-  //   },
-  // });
 });
 
 exports.renderNewForm = (req, res) => {
@@ -111,8 +108,6 @@ exports.renderEditForm = catchAsync(async (req, res) => {
 });
 
 exports.createRecipe = catchAsync(async (req, res, next) => {
-  const image = req.file;
-
   const ingredientsInputFields = req.body.ingredients;
   // count ingredient name to know how many checkboxes expect, then loop
   const ingredientsValues = ingredientsInputFields.name;
@@ -129,6 +124,8 @@ exports.createRecipe = catchAsync(async (req, res, next) => {
     name: ingredientsInputFields.name[index],
   }));
   const ingredientsQuantities = ingredientsInputFields.quantity.map((quantity, index) => ({
+    // ingredientsInputFields should be in converted to Number(), but if value is empty then it automaticaly converted to 0,
+    // if user did not add any value it counts as zero. Thats bad
     quantity: Number(ingredientsInputFields.quantity[index]),
   }));
   const ingredientsUnits = ingredientsInputFields.unit.map((unit, index) => ({
@@ -153,7 +150,7 @@ exports.createRecipe = catchAsync(async (req, res, next) => {
     step: instructionsInputFields.step[index],
   }));
 
-  const recipe = await Recipe.create({
+  const unprocessedBody = {
     title: req.body.title,
     description: req.body.description,
     ingredients: ingredientsFormated,
@@ -166,10 +163,46 @@ exports.createRecipe = catchAsync(async (req, res, next) => {
     mealTypes: req.body.mealTypes,
     dishTypes: req.body.dishTypes,
     allergens: req.body.allergens,
-    image: image ? { url: image.path, filename: image.filename } : { url: "", filename: "" },
-  });
+  };
 
-  res.redirect(`/api/recipes/${recipe._id}`);
+  const { error } = validateRecipe(unprocessedBody);
+  if (error) return next(new AppError(error.details[0].message, 400));
+
+  const image = req.file;
+
+  if (image) {
+    // this doesnt work, it uploads anyway
+    //const cloudinaryRes = await cloudinary.uploader.upload(image.path);
+    const recipe = await Recipe.create({
+      ...unprocessedBody,
+      image: { url: image.path, filename: image.filename },
+    });
+    res.redirect(`/api/recipes/${recipe._id}`);
+  } else {
+    const recipe = await Recipe.create({
+      ...unprocessedBody,
+      image: { url: "", filename: "" },
+    });
+    res.redirect(`/api/recipes/${recipe._id}`);
+  }
+
+  // const recipe = await Recipe.create({
+  //   title: req.body.title,
+  //   description: req.body.description,
+  //   ingredients: ingredientsFormated,
+  //   instructions: instructionsFormated,
+  //   prepTime: req.body.prepTime,
+  //   servings: req.body.servings,
+  //   cookTime: req.body.cookTime,
+  //   difficulty: req.body.difficulty,
+  //   cuisines: req.body.cuisines,
+  //   mealTypes: req.body.mealTypes,
+  //   dishTypes: req.body.dishTypes,
+  //   allergens: req.body.allergens,
+  //   image: image ? { url: image.path, filename: image.filename } : { url: "", filename: "" },
+  // });
+
+  // res.redirect(`/api/recipes/${recipe._id}`);
 });
 
 exports.updateRecipe = catchAsync(async (req, res, next) => {

@@ -1,14 +1,7 @@
 <% layout('layouts/boilerplate')%>
-
-<form
-  id="recipe-form"
-  class="row g-3"
-  action="/api/recipes"
-  method="POST"
-  novalidate
-  enctype="multipart/form-data"
->
-  <!-- Done -->
+<h1 class="text-center">New Recipe</h1>
+<form id="recipe-form" class="row g-3" action="/api/recipes" method="POST" novalidate enctype="multipart/form-data">
+  <!-- Title -->
   <div class="col-md-6 mb-3">
     <label for="inputTitle" class="form-label">Title</label>
     <div class="input-group">
@@ -20,8 +13,9 @@
         type="text"
         class="form-control"
         id="inputTitle"
-        maxlength="60"
-        aria-label="Recipe Title up to 60 characters"
+        minlength="5"
+        maxlength="50"
+        aria-label="Recipe Title up to 50 characters"
         required
         autocomplete="off"
         aria-required="true"
@@ -29,9 +23,10 @@
         autofocus
       />
     </div>
-    <small class="form-text text-muted">Maximum length 60 characters.</small>
+    <small class="form-text text-muted">Maximum length 50 characters.</small>
   </div>
-  <!-- Done -->
+
+  <!-- Difficulty -->
   <div class="col-md-3 mb-3">
     <label for="inputDifficulty" class="form-label">Difficulty</label>
     <div class="input-group">
@@ -54,7 +49,7 @@
     <small class="form-text text-muted">Please provide recipe difficulty level.</small>
   </div>
 
-  <!-- Done -->
+  <!-- Servings -->
   <div class="col-md-3 mb-3">
     <label for="inputServings" class="form-label">Servings</label>
     <div class="input-group">
@@ -75,7 +70,7 @@
     <small class="form-text text-muted">Maximum of 16 servings allowed.</small>
   </div>
 
-  <!-- Done -->
+  <!-- Description -->
   <div class="col-md-12 mb-3">
     <label for="textareaDescription" class="form-label">Description</label>
     <div class="input-group">
@@ -85,6 +80,7 @@
         id="textareaDescription"
         style="resize: none"
         name="description"
+        minlength="5"
         maxlength="500"
         autocomplete="off"
         rows="4"
@@ -96,7 +92,7 @@
     <small class="form-text text-muted">Maximum length 500 characters.</small>
   </div>
 
-  <!-- Done -->
+  <!-- Dish Type -->
   <div class="col-md-3 mb-3">
     <label for="inputDishTypes" class="form-label">Dish Type:</label>
     <div class="input-group">
@@ -104,7 +100,7 @@
       <select
         id="inputDishTypes"
         class="form-select"
-        name="dishTypes"
+        name="dishTypes[]"
         multiple
         size="4"
         required
@@ -116,12 +112,10 @@
         <% }) %>
       </select>
     </div>
-    <small class="form-text text-muted"
-      >Use <kbd>ctrl</kbd> key to select up to 3 dish types.</small
-    >
+    <small class="form-text text-muted">Use <kbd>ctrl</kbd> key to select up to 3 dish types.</small>
   </div>
 
-  <!-- Done -->
+  <!-- Meal Type -->
   <div class="col-md-3 mb-3">
     <label for="inputMealTypes" class="form-label">Meal Type:</label>
     <div class="input-group">
@@ -129,7 +123,7 @@
         <i class="bi bi-cup-hot-fill"></i>
       </span>
       <select
-        name="mealTypes"
+        name="mealTypes[]"
         id="inputMealTypes"
         class="form-select"
         multiple
@@ -143,12 +137,10 @@
         <% }) %>
       </select>
     </div>
-    <small class="form-text text-muted"
-      >Use <kbd>ctrl</kbd> key to select up to 3 meal types.</small
-    >
+    <small class="form-text text-muted">Use <kbd>ctrl</kbd> key to select up to 3 meal types.</small>
   </div>
 
-  <!-- Done -->
+  <!-- Cuisine -->
   <div class="col-md-3 mb-3">
     <label for="inputCuisine" class="form-label">Cuisine</label>
     <div class="input-group">
@@ -156,7 +148,7 @@
       <select
         id="inputCuisine"
         class="form-select"
-        name="cuisines"
+        name="cuisines[]"
         multiple
         required
         size="4"
@@ -171,23 +163,21 @@
     <small class="form-text text-muted">Use <kbd>ctrl</kbd> key to select up to 3 cuisines.</small>
   </div>
 
-  <!-- Done -->
+  <!-- Contains Allergens -->
   <div class="col-md-3 mb-3">
     <label for="inputAllergens" class="form-label">Contains Allergens</label>
     <div class="input-group">
       <span class="input-group-text"><i class="bi bi-exclamation-triangle-fill"></i></span>
-      <select id="inputAllergens" class="form-select" name="allergens" multiple>
+      <select id="inputAllergens" class="form-select" name="allergens[]" multiple>
         <% allergensOptions.forEach(option => { %>
         <option value="<%= option %>"><%= option %></option>
         <% }) %>
       </select>
     </div>
-    <small class="form-text text-muted"
-      >To select multiple allergens, use the <kbd>ctrl</kbd> key</small
-    >
+    <small class="form-text text-muted">To select multiple allergens, use the <kbd>ctrl</kbd> key</small>
   </div>
 
-  <!-- Done -->
+  <!-- Preparation time -->
   <div class="col-md-3 mb-3">
     <label for="inputPreparationTime" class="form-label">Preparation time</label>
     <div class="input-group">
@@ -208,7 +198,7 @@
     <small class="form-text text-muted">Preparation time cannot exceed 1440 min | 24h</small>
   </div>
 
-  <!-- Done -->
+  <!-- Cooking time -->
   <div class="col-md-3 mb-3">
     <label for="inputCookingTime" class="form-label">Cooking time</label>
     <div class="input-group">
@@ -229,7 +219,7 @@
     <small class="form-text text-muted">Cooking time cannot exceed 1440 min | 24h</small>
   </div>
 
-  <!-- Done -->
+  <!-- Add image -->
   <div class="col-md-6 mb-3">
     <label for="inputImage" class="form-label">Add image</label>
     <div class="input-group">
@@ -249,12 +239,11 @@
     >
   </div>
 
-  <!-- Done -->
+  <!-- Ingredient Field -->
   <div class="col-md-12 ingredient-box" id="ingredientContainerLabel">
     <label for="ingredient-container" class="form-label small text-muted"
-      >Please enter a list of all ingredients required for this recipe, along with their respective
-      quantities. If there are any optional ingredients, please indicate this by unchecking the
-      corresponding checkbox.</label
+      >Please enter a list of all ingredients required for this recipe, along with their respective quantities. If there
+      are any optional ingredients, please indicate this by unchecking the corresponding checkbox.</label
     >
     <div class="ingredient-container"></div>
     <div class="d-grid gap-2 col-md-6 mx-auto">
@@ -264,11 +253,11 @@
     </div>
   </div>
 
-  <!-- Done -->
+  <!-- Instruction Field -->
   <div class="col-md-12 instruction-box" id="instructionContainerLabel">
     <label for="instruction-container" class="form-label small text-muted"
-      >Please provide a detailed list of instructions for preparing this recipe. If necessary, you
-      may include additional notes or tips to help ensure success.</label
+      >Please provide a detailed list of instructions for preparing this recipe. If necessary, you may include
+      additional notes or tips to help ensure success.</label
     >
     <div class="instruction-container"></div>
     <div class="d-grid gap-2 col-md-6 mx-auto">
@@ -286,7 +275,7 @@
 <!-- HTML code for the template -->
 <template id="ingredient-template">
   <div class="input-group mb-3">
-    <!-- ingredient checkbox -->
+    <!-- Ingredient Checkbox -->
     <div class="input-group-text">
       <span><label class="ingredient-checkbox-label">Required</label>&nbsp;</span>
       <input
@@ -297,7 +286,7 @@
         value="true"
       />
     </div>
-    <!-- ingredient input field -->
+    <!-- Ingredient Input Field -->
     <input
       list="suggestion-list"
       type="text"
@@ -313,7 +302,7 @@
       style="max-width: 60%"
     />
     <datalist class="suggestion-list" id="suggestion-list"></datalist>
-    <!-- ingredient quantity field -->
+    <!-- Ingredient Quantity Field -->
     <input
       id="inputQuantity"
       type="number"
@@ -328,7 +317,7 @@
       aria-label="Quantity"
       style="max-width: 20%"
     />
-    <!-- ingredient units field -->
+    <!-- Ingredient Units Field -->
     <select
       class="form-select"
       aria-label="Select unit"
@@ -341,7 +330,7 @@
       <option value="<%= option %>"><%= option %></option>
       <% }) %>
     </select>
-    <!-- ingredient delete btn -->
+    <!-- Ingredient Delete BTN -->
     <button data-action="delete" class="btn btn-danger delete-ingredient-btn" type="button">
       <i class="bi bi-trash3" style="pointer-events: none"></i>
     </button>
@@ -351,7 +340,9 @@
 <!-- HTML code for the template -->
 <template id="instruction-template">
   <div class="input-group mb-3">
+    <!-- Instruction Step NBR -->
     <span class="input-group-text instruction-nbr">Step 1</span>
+    <!-- Instruction Input Field -->
     <input
       type="text"
       class="form-control instruction-input"
@@ -360,7 +351,7 @@
       placeholder="Instruction"
       aria-label="Instruction"
     />
-    <!-- additional field with note or tip can be added later-->
+    <!-- Instruction Delete BTN -->
     <button data-action="delete" class="btn btn-danger delete-instruction-btn" type="button">
       <i class="bi bi-trash3" style="pointer-events: none"></i>
     </button>
@@ -389,25 +380,15 @@
   // function to add new ingredient
   function addIngredientElement() {
     let ingredient = ingredientTemplate.content.cloneNode(true);
-    ingredient
-      .querySelector(".ingredient-checkbox")
-      .setAttribute("id", `ingredientCheckbox${ingredientCount}`);
-    ingredient
-      .querySelector(".ingredient-checkbox-label")
-      .setAttribute("for", `ingredientCheckbox${ingredientCount}`);
+    ingredient.querySelector(".ingredient-checkbox").setAttribute("id", `ingredientCheckbox${ingredientCount}`);
+    ingredient.querySelector(".ingredient-checkbox-label").setAttribute("for", `ingredientCheckbox${ingredientCount}`);
     ingredient
       .querySelector(".ingredient-checkbox")
       .setAttribute("name", `ingredients[required][item${ingredientCount}]`);
-    ingredient
-      .querySelector(".ingredient-input")
-      .setAttribute("id", `ingredient${ingredientCount}`);
-    ingredient
-      .querySelector(".ingredient-input")
-      .setAttribute("list", `suggestion-list${ingredientCount}`);
+    ingredient.querySelector(".ingredient-input").setAttribute("id", `ingredient${ingredientCount}`);
+    ingredient.querySelector(".ingredient-input").setAttribute("list", `suggestion-list${ingredientCount}`);
     // fix data list
-    ingredient
-      .querySelector(".suggestion-list")
-      .setAttribute("id", `suggestion-list${ingredientCount}`);
+    ingredient.querySelector(".suggestion-list").setAttribute("id", `suggestion-list${ingredientCount}`);
 
     ingredientContainer.appendChild(ingredient);
   }
@@ -415,9 +396,7 @@
   function addInstructionElement() {
     let instruction = instructionTemplate.content.cloneNode(true);
 
-    instruction
-      .querySelector(".instruction-input")
-      .setAttribute("id", `instruction${instructionCount}`);
+    instruction.querySelector(".instruction-input").setAttribute("id", `instruction${instructionCount}`);
     instruction.querySelector(".instruction-nbr").innerText = `Step ${instructionCount}`;
     instructionContainer.appendChild(instruction);
   }

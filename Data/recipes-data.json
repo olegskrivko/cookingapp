@@ -1222,3 +1222,322 @@
     "Wheat",
     "Dairy"
   ],
+}
+
+{
+  "title": "Homemade Pizza",
+  "description": "A classic homemade pizza recipe that is perfect for family movie night or a dinner party. Customize the toppings to your liking!",
+  "ingredients": [
+  {
+  "name": "All-purpose flour",
+  "quantity": 500,
+  "unit": "grams",
+  "required": true
+  },
+  {
+  "name": "Active dry yeast",
+  "quantity": 2,
+  "unit": "teaspoons",
+  "required": true
+  },
+  {
+  "name": "Salt",
+  "quantity": 1,
+  "unit": "teaspoon",
+  "required": true
+  },
+  {
+  "name": "Sugar",
+  "quantity": 1,
+  "unit": "teaspoon",
+  "required": true
+  },
+  {
+  "name": "Warm water",
+  "quantity": 250,
+  "unit": "milliliters",
+  "required": true
+  },
+  {
+  "name": "Olive oil",
+  "quantity": 2,
+  "unit": "tablespoons",
+  "required": true
+  },
+  {
+  "name": "Pizza sauce",
+  "quantity": 1,
+  "unit": "cup",
+  "required": true
+  },
+  {
+  "name": "Mozzarella cheese",
+  "quantity": 2,
+  "unit": "cups",
+  "required": true
+  },
+  {
+  "name": "Toppings of your choice (e.g. pepperoni, mushrooms, peppers, onions)",
+  "quantity": null,
+  "unit": null,
+  "required": false
+  }
+  ],
+  "instructions": [
+  {
+  "step": "Preheat the oven to 425°F (218°C)."
+  },
+  {
+  "step": "In a large bowl, combine the flour, yeast, salt, and sugar."
+  },
+  {
+  "step": "Add the warm water and olive oil to the bowl, and mix until a dough forms."
+  },
+  {
+  "step": "Knead the dough on a floured surface for 5-7 minutes, until it becomes smooth and elastic."
+  },
+  {
+  "step": "Place the dough in a greased bowl, cover with a towel, and let it rise for 10-15 minutes."
+  },
+  {
+  "step": "Roll out the dough on a floured surface, and transfer it to a greased pizza pan."
+  },
+  {
+  "step": "Spread the pizza sauce over the dough, leaving a small border around the edges."
+  },
+  {
+  "step": "Add the shredded mozzarella cheese and toppings of your choice."
+  },
+  {
+  "step": "Bake the pizza for 15-20 minutes, until the cheese is melted and the crust is golden brown."
+  },
+  {
+  "step": "Remove from the oven, slice, and serve hot."
+  }
+  ],
+  "prepTime": 20,
+  "cookTime": 20,
+  "totalTime": 40,
+  "servings": 6,
+  "difficulty": "Medium",
+  "cuisines": [
+  "Italian"
+  ],
+  "mealTypes": [
+  "Dinner"
+  ],
+  "dishTypes": [
+  "Pizza"
+  ],
+  "allergens": [
+  "Wheat"
+  ]
+  }
+
+
+  {
+    "title": "Garlic Baked Shrimp",
+    "description": "Delicious and flavorful baked shrimp dish with garlic and herbs",
+    "ingredients": [
+      {
+        "name": "Large shrimp, peeled and deveined",
+        "quantity": 1.5,
+        "unit": "lbs",
+        "required": true
+      },
+      {
+        "name": "Olive oil",
+        "quantity": 1/4,
+        "unit": "cup",
+        "required": true
+      },
+      {
+        "name": "Garlic, minced",
+        "quantity": 4,
+        "unit": "cloves",
+        "required": true
+      },
+      {
+        "name": "Lemon juice",
+        "quantity": 2,
+        "unit": "tbsp",
+        "required": true
+      },
+      {
+        "name": "Dried oregano",
+        "quantity": 2,
+        "unit": "tsp",
+        "required": true
+      },
+      {
+        "name": "Salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "required": true
+      },
+      {
+        "name": "Black pepper",
+        "quantity": 1/2,
+        "unit": "tsp",
+        "required": true
+      }
+    ],
+    "instructions": [
+      {
+        "step": "Preheat oven to 400°F (200°C)."
+      },
+      {
+        "step": "In a bowl, whisk together olive oil, garlic, lemon juice, oregano, salt, and black pepper."
+      },
+      {
+        "step": "Add the shrimp to the bowl and toss to coat."
+      },
+      {
+        "step": "Arrange the shrimp in a single layer in a baking dish."
+      },
+      {
+        "step": "Bake for 10-12 minutes, or until the shrimp are pink and cooked through."
+      },
+      {
+        "step": "Serve hot with lemon wedges and parsley, if desired."
+      }
+    ],
+    "prepTime": 10,
+    "cookTime": 12,
+    "totalTime": 22,
+    "servings": 4,
+    "difficulty": "Easy",
+    "cuisines": [
+      "American"
+    ],
+    "mealTypes": [
+      "Main Course"
+    ],
+    "dishTypes": [
+      "Seafood"
+    ],
+    "allergens": [
+      "Shellfish"
+    ]
+  }
+  
+
+
+  {
+    "title": "Oysters Rockefeller",
+    "description": "A classic New Orleans dish featuring baked oysters topped with a flavorful mixture of herbs, cheese, and breadcrumbs.",
+    "ingredients": [
+      {
+        "name": "Fresh oysters",
+        "quantity": 12,
+        "unit": "pieces",
+        "required": true
+      },
+      {
+        "name": "Spinach",
+        "quantity": 4,
+        "unit": "cups",
+        "required": true
+      },
+      {
+        "name": "Breadcrumbs",
+        "quantity": 1,
+        "unit": "cup",
+        "required": true
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": 1,
+        "unit": "cup",
+        "required": true
+      },
+      {
+        "name": "Butter",
+        "quantity": 1,
+        "unit": "stick",
+        "required": true
+      },
+      {
+        "name": "Onion",
+        "quantity": 1,
+        "unit": "small",
+        "required": true
+      },
+      {
+        "name": "Garlic",
+        "quantity": 2,
+        "unit": "cloves",
+        "required": true
+      },
+      {
+        "name": "Anise-flavored liqueur",
+        "quantity": 1,
+        "unit": "ounce",
+        "required": true
+      },
+      {
+        "name": "Salt",
+        "quantity": 1,
+        "unit": "teaspoon",
+        "required": true
+      },
+      {
+        "name": "Pepper",
+        "quantity": 1,
+        "unit": "teaspoon",
+        "required": true
+      }
+    ],
+    "instructions": [
+      {
+        "step": "Preheat oven to 450°F."
+      },
+      {
+        "step": "Clean the oysters, discarding any that do not close tightly when tapped."
+      },
+      {
+        "step": "In a large skillet, melt the butter over medium heat."
+      },
+      {
+        "step": "Add the onion and garlic and sauté until translucent."
+      },
+      {
+        "step": "Add the spinach and cook until wilted."
+      },
+      {
+        "step": "Add the breadcrumbs, Parmesan cheese, anise-flavored liqueur, salt, and pepper to the skillet and stir well to combine."
+      },
+      {
+        "step": "Remove the skillet from the heat."
+      },
+      {
+        "step": "Arrange the oysters in a single layer in a large baking dish."
+      },
+      {
+        "step": "Spoon the spinach mixture over the oysters."
+      },
+      {
+        "step": "Bake the oysters for 10-12 minutes or until the topping is golden brown and the oysters are heated through."
+      }
+    ],
+    "prepTime": 20,
+    "cookTime": 12,
+    "totalTime": 32,
+    "servings": 6,
+    "difficulty": "Medium",
+    "cuisines": [
+      "Cajun/Creole"
+    ],
+    "mealTypes": [
+      "Appetizers",
+      "Seafood"
+    ],
+    "dishTypes": [
+      "Baked"
+    ],
+    "allergens": [
+      "Shellfish",
+      "Dairy"
+    ]
+  }
+  

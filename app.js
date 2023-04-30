@@ -14,6 +14,8 @@ const { handleErrors, handleUnhandledErrors } = require("./controllers/errorCont
 // Define routes
 const recipeRoute = require("./routes/recipeRoutes");
 const userRoute = require("./routes/userRoutes");
+// const flash = require("connect-flash");
+// const session = require("express-session");
 
 const app = express();
 
@@ -25,6 +27,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 app.use(express.json());
+// app.use(
+//   session({
+//     secret: "my-secret-key",
+//     resave: false,
+//     saveUninitialized: false,
+//   })
+// );
+
+// app.use(flash());
 
 // Database connection - Connect to MongoDB
 const DB = process.env.MONGODB_URI;
