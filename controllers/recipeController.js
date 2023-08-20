@@ -169,6 +169,7 @@ exports.createRecipe = catchAsync(async (req, res, next) => {
   if (error) return next(new AppError(error.details[0].message, 400));
 
   const image = req.file;
+  //console.log(image);
 
   if (image) {
     // this doesnt work, it uploads anyway
@@ -212,18 +213,8 @@ exports.updateRecipe = catchAsync(async (req, res, next) => {
 
   // cousine, mealtype, alergens is not working as prefilled (need to fix)
   // Extract the fields to update from req.body.recipe
-  const {
-    title,
-    description,
-    prepTime,
-    servings,
-    cookTime,
-    difficulty,
-    cuisines,
-    mealTypes,
-    dishTypes,
-    allergens,
-  } = req.body;
+  const { title, description, prepTime, servings, cookTime, difficulty, cuisines, mealTypes, dishTypes, allergens } =
+    req.body;
 
   // instructions
   const instructionsInputFields = req.body.instructions;
